@@ -63,8 +63,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
-        heading: ["var(--font-montserrat)", "var(--font-inter)", "sans-serif"],
-        body: ["var(--font-open-sans)", "var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-dm-sans)", "var(--font-inter)", "sans-serif"],
+        body: ["var(--font-inter)", "sans-serif"],
       },
       animation: {
         "fade-in": "fadeIn 0.3s ease-in-out",

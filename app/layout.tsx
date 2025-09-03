@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat, Open_Sans } from "next/font/google";
+import { Inter, DM_Sans } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -9,14 +9,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const montserrat = Montserrat({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-});
-
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  variable: "--font-open-sans",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${openSans.variable}`}>
+    <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">
