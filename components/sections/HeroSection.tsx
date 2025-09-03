@@ -1,28 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, MessageSquare, Shield, ArrowRight } from "lucide-react";
+import { Phone, MessageSquare, Heart, ArrowRight, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/constants";
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-br from-primary-50 to-secondary-50 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <section className="relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 overflow-hidden">
+      {/* Warm overlay pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse animation-delay-2000"></div>
+      </div>
+      
       <div className="container-main section-padding relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-              Forward-Thinking{" "}
-              <span className="text-primary-600">Family Law</span> Specialists
+            <div className="flex items-center gap-2 mb-4">
+              <Heart className="h-6 w-6 text-primary-500" />
+              <span className="text-primary-700 font-medium">Your Family&apos;s Future Matters</span>
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-warmgray-900 leading-tight mb-6">
+              Finding Light in{" "}
+              <span className="text-primary-500">Life&apos;s Difficult</span>{" "}
+              Moments
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              At CVG Family Law, we provide compassionate, expert legal support through life&apos;s most challenging moments. 
-              Based in Tunbridge Wells, Kent, we&apos;re here to guide you through every step with care and expertise.
+            
+            <p className="text-xl text-warmgray-700 mb-8 leading-relaxed">
+              When family life becomes overwhelming, you need more than just legal advice – you need 
+              compassion, understanding, and a guiding hand. We&apos;re here to help you navigate toward 
+              a brighter tomorrow, one step at a time.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -39,50 +52,53 @@ export default function HeroSection() {
               </a>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <Shield className="h-5 w-5 text-secondary-600" />
-              <span>Specialist support for domestic abuse cases</span>
+            <div className="bg-warmgray-50 rounded-2xl p-4 inline-flex items-center gap-3">
+              <Home className="h-5 w-5 text-secondary-600" />
+              <span className="text-warmgray-700 text-sm">Safe space for families in crisis</span>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="bg-white rounded-lg shadow-xl p-8">
-              <h2 className="text-2xl font-bold mb-4">How We Can Help</h2>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-primary-600 mt-0.5" />
-                  <span>Expert guidance through divorce and separation</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-primary-600 mt-0.5" />
-                  <span>Protection from domestic abuse</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-primary-600 mt-0.5" />
-                  <span>Children&apos;s welfare and arrangements</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-primary-600 mt-0.5" />
-                  <span>Fair financial settlements</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <ArrowRight className="h-5 w-5 text-primary-600 mt-0.5" />
-                  <span>Mediation and collaborative solutions</span>
-                </li>
-              </ul>
-              <div className="mt-6 pt-6 border-t">
-                <p className="text-sm text-gray-600 mb-3">
-                  Led by Cora and Bridget, our team brings over 25 years of combined experience
-                </p>
-                <Link href="/about" className="text-primary-600 font-semibold hover:text-primary-700">
-                  Learn more about our team →
-                </Link>
+            {/* Hero Image Placeholder */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="bg-gradient-to-br from-primary-100 to-secondary-100 h-[500px] flex items-center justify-center">
+                <div className="text-center p-8">
+                  <div className="w-32 h-32 mx-auto mb-4 bg-white rounded-full flex items-center justify-center">
+                    <Heart className="h-16 w-16 text-primary-400" />
+                  </div>
+                  <p className="text-warmgray-600 text-lg font-medium mb-2">[Family Support Image]</p>
+                  <p className="text-warmgray-500 text-sm">Warm, supportive family imagery</p>
+                </div>
               </div>
+              
+              {/* Floating help cards */}
+              <motion.div 
+                className="absolute top-4 left-4 bg-white rounded-xl shadow-lg p-4 max-w-[200px]"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1 }}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-medium text-warmgray-700">Available Now</span>
+                </div>
+                <p className="text-sm text-warmgray-600">Free 30-min consultation</p>
+              </motion.div>
+              
+              <motion.div 
+                className="absolute bottom-4 right-4 bg-white rounded-xl shadow-lg p-4 max-w-[220px]"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2 }}
+              >
+                <p className="text-2xl font-bold text-primary-600 mb-1">1000+</p>
+                <p className="text-sm text-warmgray-600">Families helped to heal</p>
+              </motion.div>
             </div>
           </motion.div>
         </div>

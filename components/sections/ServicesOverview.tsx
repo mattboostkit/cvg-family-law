@@ -14,16 +14,23 @@ const iconMap = {
 
 export default function ServicesOverview() {
   return (
-    <section className="section-padding bg-gray-50">
+    <section className="section-padding bg-gradient-to-b from-warmgray-50 to-white">
       <div className="container-main">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Comprehensive Family Law Services
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We provide expert legal support across all areas of family law, 
-            with a particular specialization in domestic abuse cases and children&apos;s welfare
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-primary-600 font-medium text-sm uppercase tracking-wide">How We Help</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-warmgray-900 mt-2">
+              Your Path to Peace and Resolution
+            </h2>
+            <p className="text-xl text-warmgray-600 max-w-3xl mx-auto leading-relaxed">
+              Every family&apos;s journey is unique. We offer compassionate support tailored to your 
+              specific needs, helping you find stability and hope during uncertain times.
+            </p>
+          </motion.div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -32,19 +39,33 @@ export default function ServicesOverview() {
             return (
               <motion.div
                 key={service.href}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                className="group"
               >
-                <Link href={service.href} className="block p-6">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="h-6 w-6 text-primary-600" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <div className="flex items-center text-primary-600 font-semibold">
-                    Learn more <ArrowRight className="h-4 w-4 ml-1" />
+                <Link href={service.href} className="block">
+                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
+                    {/* Image Placeholder */}
+                    <div className="h-48 bg-gradient-to-br from-primary-50 to-secondary-50 relative overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <Icon className="h-16 w-16 text-primary-300 mb-2" />
+                          <p className="text-xs text-warmgray-500">[Supportive Image]</p>
+                        </div>
+                      </div>
+                      <div className="absolute top-2 right-2 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon className="h-6 w-6 text-primary-600" />
+                      </div>
+                    </div>
+                    
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold mb-3 text-warmgray-900">{service.title}</h3>
+                      <p className="text-warmgray-600 mb-4 text-sm leading-relaxed">{service.description}</p>
+                      <div className="flex items-center text-primary-500 font-medium group-hover:text-primary-600 transition-colors">
+                        Find your path <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
                   </div>
                 </Link>
               </motion.div>
