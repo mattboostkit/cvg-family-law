@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MessageSquare, Heart, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/constants";
+import { images } from "@/lib/images";
 
 export default function HeroSection() {
   return (
@@ -64,16 +66,18 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            {/* Hero Image Placeholder */}
+            {/* Hero Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="bg-gradient-to-br from-primary-100 to-secondary-100 h-[500px] flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-white rounded-full flex items-center justify-center">
-                    <Heart className="h-16 w-16 text-primary-400" />
-                  </div>
-                  <p className="text-warmgray-600 text-lg font-medium mb-2">[Family Support Image]</p>
-                  <p className="text-warmgray-500 text-sm">Warm, supportive family imagery</p>
-                </div>
+              <div className="relative h-[500px]">
+                <Image
+                  src={images.hero.support}
+                  alt="Professional family law support - compassionate legal guidance"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
               
               {/* Floating help cards */}
