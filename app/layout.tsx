@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/CookieBanner";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const inter = Inter({
@@ -43,6 +45,8 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ScrollToTop />
+        <CookieBanner />
       </body>
     </html>
   );

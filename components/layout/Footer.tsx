@@ -1,10 +1,46 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock, Facebook, Linkedin, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook, Linkedin, Instagram, Shield, Award, Scale, Heart } from "lucide-react";
 import { siteConfig, services } from "@/lib/constants";
 
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
+      {/* Trust Badges Section */}
+      <div className="bg-warmgray-900 border-b border-gray-800">
+        <div className="container-main py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center">
+                <Shield className="h-6 w-6 text-primary-400" />
+              </div>
+              <h4 className="font-semibold text-sm">SRA Regulated</h4>
+              <p className="text-xs text-gray-400">No: {siteConfig.sra}</p>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center">
+                <Award className="h-6 w-6 text-secondary-400" />
+              </div>
+              <h4 className="font-semibold text-sm">25+ Years</h4>
+              <p className="text-xs text-gray-400">Combined Experience</p>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center">
+                <Scale className="h-6 w-6 text-primary-400" />
+              </div>
+              <h4 className="font-semibold text-sm">Law Society</h4>
+              <p className="text-xs text-gray-400">Family Law Member</p>
+            </div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center">
+                <Heart className="h-6 w-6 text-secondary-400" />
+              </div>
+              <h4 className="font-semibold text-sm">1000+ Families</h4>
+              <p className="text-xs text-gray-400">Successfully Helped</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container-main py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
@@ -137,13 +173,33 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">
-            © 2025 CVG Family Law Ltd. All rights reserved.
-          </p>
-          <p className="text-xs text-gray-500 mt-2">
-            Specialist Family Law Solicitors in Tunbridge Wells, Kent | SRA No: {siteConfig.sra} | Company No: {siteConfig.companyNo}
-          </p>
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left">
+              <p className="text-gray-400">
+                © 2025 CVG Family Law Ltd. All rights reserved.
+              </p>
+              <p className="text-xs text-gray-500 mt-2">
+                Specialist Family Law Solicitors in Tunbridge Wells, Kent | SRA No: {siteConfig.sra} | Company No: {siteConfig.companyNo}
+              </p>
+            </div>
+            <div className="flex gap-4 text-sm">
+              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/legal" className="text-gray-400 hover:text-white transition-colors">
+                Terms
+              </Link>
+              <span className="text-gray-600">|</span>
+              <button 
+                onClick={() => window.dispatchEvent(new CustomEvent('openCookieSettings'))}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                Cookie Settings
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
