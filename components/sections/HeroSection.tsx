@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, MessageSquare, Heart, ArrowRight, Home } from "lucide-react";
+import { Phone, MessageSquare, Heart, Home } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/constants";
 

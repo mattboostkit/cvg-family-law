@@ -1,10 +1,26 @@
 "use client";
 
-import { Phone, ExternalLink, AlertCircle, Heart, Shield, Users, Baby, Brain, Wallet } from "lucide-react";
+import { Phone, ExternalLink, AlertCircle, Heart, Shield, Baby, Brain, Wallet, type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const supportCategories = [
+interface Resource {
+  name: string;
+  phone?: string;
+  description: string;
+  urgent?: boolean;
+  available?: string;
+  website?: string;
+}
+
+interface SupportCategory {
+  title: string;
+  icon: LucideIcon;
+  color: string;
+  resources: Resource[];
+}
+
+const supportCategories: SupportCategory[] = [
   {
     title: "Emergency & Crisis Support",
     icon: AlertCircle,

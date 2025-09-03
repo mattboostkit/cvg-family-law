@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { FileText, Download, ExternalLink, BookOpen, Users, Phone, AlertCircle } from "lucide-react";
+import { FileText, Download, ExternalLink, BookOpen, Phone, AlertCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Resources - CVG Family Law",

@@ -49,8 +49,8 @@ export default function HopeSection() {
             
             <p className="text-lg text-warmgray-600 mb-8 leading-relaxed">
               We understand that reaching out for help takes courage. That first call, that first meeting – 
-              it's the beginning of your journey back to peace. We've helped over 1,000 families find their 
-              way through the storm, and we're ready to help you too.
+              it&apos;s the beginning of your journey back to peace. We&apos;ve helped over 1,000 families find their 
+              way through the storm, and we&apos;re ready to help you too.
             </p>
             
             <div className="space-y-4">
@@ -120,7 +120,7 @@ export default function HopeSection() {
                   </div>
                   <div>
                     <p className="text-sm text-warmgray-700 italic">
-                      "They didn't just save my case, they saved my family"
+                      &quot;They didn&apos;t just save my case, they saved my family&quot;
                     </p>
                     <p className="text-xs text-warmgray-500 mt-1">– Recent Client</p>
                   </div>
