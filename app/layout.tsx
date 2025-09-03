@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, DM_Sans } from "next/font/google";
-import Header from "@/components/layout/Header";
+import EnhancedHeader from "@/components/layout/EnhancedHeader";
 import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import ScrollToTop from "@/components/ScrollToTop";
+import FloatingConsultation from "@/components/FloatingConsultation";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,12 +41,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
-        <Header />
+        <EnhancedHeader />
         <main className="flex-1">
           {children}
         </main>
         <Footer />
         <ScrollToTop />
+        <FloatingConsultation />
         <CookieBanner />
       </body>
     </html>

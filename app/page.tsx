@@ -1,8 +1,8 @@
 import HeroSection from "@/components/sections/HeroSection";
-import TrustIndicators from "@/components/sections/TrustIndicators";
+import AnimatedStats from "@/components/AnimatedStats";
 import HopeSection from "@/components/sections/HopeSection";
 import ServicesOverview from "@/components/sections/ServicesOverview";
-import Testimonials from "@/components/sections/Testimonials";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 import SupportResources from "@/components/sections/SupportResources";
 import CTASection from "@/components/sections/CTASection";
 
@@ -10,10 +10,10 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <TrustIndicators />
+      <AnimatedStats />
       <HopeSection />
       <ServicesOverview />
-      <Testimonials />
+      <TestimonialCarousel />
       <SupportResources />
       <CTASection />
     </>
