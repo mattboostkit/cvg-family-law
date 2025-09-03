@@ -43,7 +43,7 @@ const values = [
   {
     icon: Shield,
     title: "Protection & Safety",
-    description: "Specializing in domestic abuse cases, we prioritize your safety and work swiftly to secure necessary protections.",
+    description: "Specialising in domestic abuse cases, we prioritise your safety and work swiftly to secure necessary protections.",
   },
   {
     icon: Users,
@@ -182,7 +182,7 @@ export default function AboutPage() {
                     <span className="text-primary-600">3.</span> Solution-Focused
                   </h3>
                   <p className="text-gray-600 ml-6">
-                    We work towards practical, achievable solutions that minimize conflict and 
+                    We work towards practical, achievable solutions that minimise conflict and 
                     promote the best outcomes for all involved, especially children.
                   </p>
                 </div>

@@ -77,7 +77,7 @@ const supportCategories: SupportCategory[] = [
       {
         name: "Respect Phoneline",
         phone: "0808 8024 040",
-        description: "For people worried about their own behavior",
+        description: "For people worried about their own behaviour",
         website: "https://respectphoneline.org.uk",
         available: "Mon-Fri 10am-5pm",
       },
@@ -224,7 +224,7 @@ export default function SupportResources() {
             </h2>
             <p className="text-xl text-warmgray-600 max-w-3xl mx-auto leading-relaxed">
               Access a comprehensive network of support services. These organizations 
-              provide immediate help, ongoing support, and specialized assistance.
+              provide immediate help, ongoing support, and specialised assistance.
             </p>
           </motion.div>
         </div>

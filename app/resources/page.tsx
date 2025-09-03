@@ -329,7 +329,7 @@ export default function ResourcesPage() {
         <div className="container-main text-center">
           <BookOpen className="h-12 w-12 mx-auto mb-4" />
           <h2 className="text-3xl font-bold mb-4">
-            Need Personalized Advice?
+            Need Personalised Advice?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
             While these resources are helpful, every situation is unique. Get expert advice 

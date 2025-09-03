@@ -140,7 +140,7 @@ export default function ServicesPage() {
                 <div className="flex-1">
                   <h3 className="text-xl font-bold mb-2">Tailored Strategy</h3>
                   <p className="text-gray-600">
-                    We develop a personalized approach based on your specific circumstances, 
+                    We develop a personalised approach based on your specific circumstances, 
                     priorities, and desired outcomes.
                   </p>
                 </div>

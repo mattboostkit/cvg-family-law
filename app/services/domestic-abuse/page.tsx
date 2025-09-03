@@ -69,7 +69,7 @@ export default function DomesticAbusePage() {
               Understanding Domestic Abuse
             </h2>
             <p className="text-lg text-gray-600 mb-8 text-center max-w-3xl mx-auto">
-              Domestic abuse isn&apos;t just physical violence. It includes any behavior used to 
+              Domestic abuse isn&apos;t just physical violence. It includes any behaviour used to 
               control, coerce, threaten, or intimidate a partner or family member.
             </p>
             
@@ -101,7 +101,7 @@ export default function DomesticAbusePage() {
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="text-xl font-bold mb-3 text-primary-600">Coercive Control</h3>
                 <p className="text-gray-600">
-                  Pattern of controlling behavior including monitoring, restricting freedom, or 
+                  Pattern of controlling behaviour including monitoring, restricting freedom, or 
                   making threats.
                 </p>
               </div>
@@ -267,7 +267,7 @@ export default function DomesticAbusePage() {
                   </div>
                   <div className="flex items-start gap-3">
                     <Heart className="h-5 w-5 text-secondary-600 mt-0.5" />
-                    <p className="text-gray-600">Referrals to counseling and support groups</p>
+                    <p className="text-gray-600">Referrals to counselling and support groups</p>
                   </div>
                 </div>
               </div>

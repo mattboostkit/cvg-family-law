@@ -69,7 +69,7 @@ const faqCategories = [
       },
       {
         q: "Can I stop my ex seeing our children?",
-        a: "Only if there's genuine risk of harm. Courts strongly favor children maintaining relationships with both parents. Stopping contact without good reason could result in enforcement action against you."
+        a: "Only if there's genuine risk of harm. Courts strongly favour children maintaining relationships with both parents. Stopping contact without good reason could result in enforcement action against you."
       },
       {
         q: "At what age can children choose which parent to live with?",
@@ -94,7 +94,7 @@ const faqCategories = [
       },
       {
         q: "Will reporting abuse affect child custody?",
-        a: "Courts take abuse allegations seriously and prioritize children's safety. Proven abuse can affect contact arrangements, potentially requiring supervised contact or no contact in severe cases."
+        a: "Courts take abuse allegations seriously and prioritise children's safety. Proven abuse can affect contact arrangements, potentially requiring supervised contact or no contact in severe cases."
       },
       {
         q: "I'm worried about costs - can I still get help?",
@@ -173,7 +173,7 @@ export default function FAQPage() {
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Find answers to common questions about family law, divorce, and our services. 
-              Can&apos;t find what you&apos;re looking for? Contact us for personalized advice.
+              Can&apos;t find what you&apos;re looking for? Contact us for personalised advice.
             </p>
           </div>
         </div>
@@ -219,7 +219,7 @@ export default function FAQPage() {
               Still Have Questions?
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Every situation is unique. Get personalized advice with our free 30-minute consultation.
+              Every situation is unique. Get personalised advice with our free 30-minute consultation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

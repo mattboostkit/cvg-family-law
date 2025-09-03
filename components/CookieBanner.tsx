@@ -115,8 +115,8 @@ export default function CookieBanner() {
                               We care about your privacy
                             </h3>
                             <p className="text-sm text-warmgray-600 mb-4 max-w-3xl">
-                              We use cookies to enhance your browsing experience, provide personalized content, 
-                              and analyze our traffic. We prioritize your privacy and only collect necessary 
+                              We use cookies to enhance your browsing experience, provide personalised content, 
+                              and analyse our traffic. We prioritise your privacy and only collect necessary 
                               data to improve our services to families in need of legal support.{" "}
                               <Link href="/privacy" className="text-primary-600 hover:text-primary-700 underline">
                                 Learn more in our Privacy Policy
