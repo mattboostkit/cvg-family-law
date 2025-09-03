@@ -31,7 +31,7 @@ export default function CookieBanner() {
       try {
         const saved = JSON.parse(hasConsent);
         setPreferences(saved);
-      } catch (e) {
+      } catch {
         // Invalid data, show banner again
         setShowBanner(true);
       }

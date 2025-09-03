@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock, Facebook, Linkedin, Instagram, Shield, Award, Scale, Heart } from "lucide-react";
 import { siteConfig, services } from "@/lib/constants";
