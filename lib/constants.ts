@@ -1,17 +1,19 @@
 import { NavItem, Service } from './types';
 
 export const siteConfig = {
-  name: 'CVG Family Law',
+  name: 'CVG Family Law Ltd',
   description: 'Forward-thinking, contemporary family law firm in Tunbridge Wells, Kent',
-  url: 'https://cvgfamilylaw.co.uk',
+  url: 'https://www.cvgfamilylaw.com',
   phone: '07984 782 713',
-  email: 'contact@cvgfamilylaw.co.uk',
+  email: 'contact@cvgfamilylaw.com',
   address: {
-    street: '89 High St',
+    street: '89 High Street',
     city: 'Tunbridge Wells',
     county: 'Kent',
-    postcode: 'TN1 1XP',
+    postcode: 'TN1 1YG',
   },
+  sra: '8007597',
+  companyNo: '15007102',
   social: {
     linkedin: 'https://linkedin.com/company/cvg-family-law',
     instagram: 'https://instagram.com/cvgfamilylaw',

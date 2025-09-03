@@ -81,7 +81,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">
-                  Privacy Policy
+                  Privacy & Complaints
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal" className="text-gray-300 hover:text-white transition-colors">
+                  Legal & Regulatory
                 </Link>
               </li>
             </ul>
@@ -134,10 +139,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} CVG Family Law. All rights reserved.
+            © 2025 CVG Family Law Ltd. All rights reserved.
           </p>
           <p className="text-xs text-gray-500 mt-2">
-            Specialist Family Law Solicitors in Tunbridge Wells, Kent
+            Specialist Family Law Solicitors in Tunbridge Wells, Kent | SRA No: {siteConfig.sra} | Company No: {siteConfig.companyNo}
           </p>
         </div>
       </div>
