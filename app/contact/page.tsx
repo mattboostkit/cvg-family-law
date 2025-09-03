@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
+import GoogleMap from "@/components/GoogleMap";
 
 const serviceAreas = [
   "Divorce & Separation",
@@ -360,9 +361,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 
-                <div className="bg-gray-200 rounded-lg flex items-center justify-center">
-                  <p className="text-gray-500">Map placeholder</p>
-                </div>
+                <GoogleMap height="300" />
               </div>
             </div>
           </div>

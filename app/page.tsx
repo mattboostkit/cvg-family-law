@@ -4,6 +4,7 @@ import HopeSection from "@/components/sections/HopeSection";
 import ServicesOverview from "@/components/sections/ServicesOverview";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import SupportResources from "@/components/sections/SupportResources";
+import MapSection from "@/components/MapSection";
 import CTASection from "@/components/sections/CTASection";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <ServicesOverview />
       <TestimonialCarousel />
       <SupportResources />
+      <MapSection />
       <CTASection />
     </>
   );
