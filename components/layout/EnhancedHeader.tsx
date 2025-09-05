@@ -180,7 +180,7 @@ export default function EnhancedHeader() {
             isScrolled ? "py-3" : "py-4"
           )}>
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="group">
               <motion.div 
                 whileHover={{ scale: 1.05 }}
                 className="transition-transform"
@@ -191,12 +191,6 @@ export default function EnhancedHeader() {
                   className="h-12 w-auto"
                 />
               </motion.div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
-                  CVG Family Law
-                </h1>
-                <p className="text-xs text-gray-600">Compassionate Legal Support</p>
-              </div>
             </Link>
 
             {/* Desktop Navigation */}
