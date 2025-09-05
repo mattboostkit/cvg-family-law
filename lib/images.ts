@@ -5,8 +5,8 @@ export const images = {
   // Hero and general images
   hero: {
     main: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1920&h=1080&fit=crop", // Professional woman lawyer
-    support: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=1920&h=1080&fit=crop", // Supportive hands
-    family: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=1920&h=1080&fit=crop", // Family together
+    support: "/images/Homepage.webp", // CVG Family Law custom homepage image
+    family: "/images/Homepage.webp", // CVG Family Law custom homepage image
   },
   
   // Service specific images

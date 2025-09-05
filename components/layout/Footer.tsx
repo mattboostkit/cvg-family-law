@@ -47,7 +47,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-lg font-bold mb-4">CVG Family Law</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/logos/Logo_Flat_White.svg" 
+                alt="CVG Family Law" 
+                className="h-8 w-auto"
+              />
+              <h3 className="text-lg font-bold">CVG Family Law</h3>
+            </div>
             <p className="text-gray-300 mb-4">
               Forward-thinking family law specialists providing compassionate and expert legal support in Tunbridge Wells, Kent.
             </p>

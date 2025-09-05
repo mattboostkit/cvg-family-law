@@ -183,9 +183,13 @@ export default function EnhancedHeader() {
             <Link href="/" className="flex items-center gap-3 group">
               <motion.div 
                 whileHover={{ scale: 1.05 }}
-                className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow"
+                className="transition-transform"
               >
-                <Shield className="h-7 w-7 text-white" />
+                <img 
+                  src="/logos/Logo_Flat.svg" 
+                  alt="CVG Family Law" 
+                  className="h-12 w-auto"
+                />
               </motion.div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
