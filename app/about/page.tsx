@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Award, Users, Heart, Shield, ArrowRight, CheckCircle } from "lucide-react";
-import MapSection from "@/components/MapSection";
 
 export const metadata: Metadata = {
   title: "About Us - CVG Family Law",

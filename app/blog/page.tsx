@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, Clock, ArrowRight, Tag, User, Search, TrendingUp, BookOpen, Shield } from "lucide-react";
+import { Calendar, Clock, ArrowRight, User, Search, TrendingUp, BookOpen, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Family Law Blog - Domestic Abuse Support & Legal Insights | CVG Family Law",
@@ -114,7 +114,7 @@ export default function BlogPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <TrendingUp className="h-4 w-4" />
-              Kent's Leading Family Law Resource Hub
+              Kent&apos;s Leading Family Law Resource Hub
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Domestic Abuse Support & Legal Insights
@@ -251,7 +251,7 @@ export default function BlogPage() {
                 <Shield className="h-8 w-8 mb-3" />
                 <h3 className="text-xl font-bold mb-2">Need Urgent Help?</h3>
                 <p className="text-sm mb-4 opacity-90">
-                  If you're in immediate danger, call 999. For emergency legal advice:
+                  If you&apos;re in immediate danger, call 999. For emergency legal advice:
                 </p>
                 <a
                   href="tel:07984782713"

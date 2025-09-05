@@ -236,7 +236,7 @@ export default function DomesticAbusePage() {
                   <div className="flex items-start gap-3">
                     <Home className="h-5 w-5 text-purple-600 mt-1" />
                     <div>
-                      <p className="font-semibold">Kent Women's Refuge</p>
+                      <p className="font-semibold">Kent Women&apos;s Refuge</p>
                       <p className="text-sm text-gray-600">24/7 emergency accommodation</p>
                       <a href="tel:08082000247" className="text-sm text-primary-600 hover:underline">0808 2000 247</a>
                     </div>
