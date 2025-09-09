@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Menu, X, ChevronDown, Phone, Mail, MapPin, 
   Shield, Heart, Users, Calculator, Clock,
-  ArrowRight, AlertTriangle, MessageSquare
+  ArrowRight, AlertTriangle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/constants";

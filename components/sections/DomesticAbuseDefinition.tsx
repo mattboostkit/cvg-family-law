@@ -20,7 +20,7 @@ export default function DomesticAbuseDefinition() {
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-primary-100">
             <Quote className="h-8 w-8 text-primary-500 mx-auto mb-6" />
             <blockquote className="text-xl text-warmgray-800 italic leading-relaxed mb-4">
-              "any incident or pattern of incidents of controlling, coercive, threatening behaviour, violence or abuse between those aged 16 or over who are, or have been, intimate partners or family members regardless of gender or sexuality."
+              &ldquo;any incident or pattern of incidents of controlling, coercive, threatening behaviour, violence or abuse between those aged 16 or over who are, or have been, intimate partners or family members regardless of gender or sexuality.&rdquo;
             </blockquote>
             <cite className="text-primary-600 font-semibold">
               – UK Government definition

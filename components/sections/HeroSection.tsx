@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, MessageSquare, Heart, Home } from "lucide-react";
+import { Phone, MessageSquare, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/constants";
 import { images } from "@/lib/images";
