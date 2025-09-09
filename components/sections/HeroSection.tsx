@@ -29,9 +29,9 @@ export default function HeroSection() {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-warmgray-900 leading-tight mb-6">
-              Finding Light in{" "}
-              <span className="text-primary-500">Life&apos;s Difficult</span>{" "}
-              Moments
+              <span className="text-primary-500">Specialist Family Lawyers</span>{" "}
+              for Victims of{" "}
+              <span className="text-primary-500">Domestic Abuse</span>
             </h1>
             
             <p className="text-xl text-warmgray-700 mb-8 leading-relaxed">
@@ -54,10 +54,6 @@ export default function HeroSection() {
               </a>
             </div>
 
-            <div className="bg-warmgray-50 rounded-2xl p-4 inline-flex items-center gap-3">
-              <Home className="h-5 w-5 text-secondary-600" />
-              <span className="text-warmgray-700 text-sm">Safe space for families in crisis</span>
-            </div>
           </motion.div>
 
           <motion.div

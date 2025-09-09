@@ -350,7 +350,7 @@ export default function EnhancedHeader() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all group-hover:w-full"></span>
               </Link>
 
-              {/* CTA Buttons */}
+              {/* CTA Button */}
               <div className="flex items-center gap-3">
                 <a
                   href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
@@ -359,13 +359,6 @@ export default function EnhancedHeader() {
                   <Phone className="h-4 w-4" />
                   <span className="hidden xl:inline">{siteConfig.phone}</span>
                 </a>
-                <Link
-                  href="/contact"
-                  className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-5 py-2.5 rounded-full font-medium hover:shadow-lg transition-all hover:scale-105 flex items-center gap-2"
-                >
-                  <MessageSquare className="h-4 w-4" />
-                  Get Started
-                </Link>
               </div>
             </div>
 

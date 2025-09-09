@@ -99,7 +99,7 @@ export default function Header() {
                 <Shield className="h-6 w-6 text-primary-600" />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-primary-600">CVG Family Law</h1>
+                <h1 className="text-xl sm:text-2xl font-bold text-primary-600">Specialist Family Lawyers for Victims of Domestic Abuse</h1>
                 <p className="text-xs text-gray-600 hidden sm:block">Tunbridge Wells, Kent • SRA: 8007597</p>
               </div>
             </Link>

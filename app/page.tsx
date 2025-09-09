@@ -1,4 +1,5 @@
 import HeroSection from "@/components/sections/HeroSection";
+import DomesticAbuseDefinition from "@/components/sections/DomesticAbuseDefinition";
 import AnimatedStats from "@/components/AnimatedStats";
 import HopeSection from "@/components/sections/HopeSection";
 import ServicesOverview from "@/components/sections/ServicesOverview";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <DomesticAbuseDefinition />
       <AnimatedStats />
       <HopeSection />
       <ServicesOverview />
