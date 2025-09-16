@@ -1,11 +1,9 @@
-import { defineField, defineType } from 'sanity';
+import { defineField, defineType, type PreviewValue } from 'sanity';
 
-interface BlogPostPreviewSelection {
-  title?: string;
+type BlogPostPreviewSelection = PreviewValue & {
   author?: string;
-  media?: unknown;
   publishedAt?: string;
-}
+};
 
 export default defineType({
   name: 'blogPost',
