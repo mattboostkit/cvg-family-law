@@ -74,6 +74,11 @@ const supportOrganizations = [
         description: "Support services and emergency accommodation",
         website: "https://www.refuge.org.uk/",
       },
+      {
+        name: "Hollie Guard",
+        description: "Personal safety app offering live tracking, duress alerts, and check-ins for anyone at risk.",
+        website: "https://hollieguard.com/",
+      },
     ],
   },
   {
@@ -215,7 +220,7 @@ export default function ResourcesPage() {
       </section>
 
       {/* Downloadable Guides */}
-      <section className="section-padding">
+      <section id="guides" className="section-padding">
         <div className="container-main">
           <h2 className="text-3xl font-bold mb-8 text-center">
             Free Guides & Checklists
@@ -246,13 +251,13 @@ export default function ResourcesPage() {
       </section>
 
       {/* Support Organizations */}
-      <section className="section-padding bg-gray-50">
+      <section id="support" className="section-padding bg-gray-50">
         <div className="container-main">
           <h2 className="text-3xl font-bold mb-8 text-center">
             Support Organizations
           </h2>
           
-          <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-lg mb-8 max-w-4xl mx-auto">
+          <div id="emergency" className="bg-red-50 border-l-4 border-red-600 p-4 rounded-lg mb-8 max-w-4xl mx-auto">
             <div className="flex items-start gap-3">
               <AlertCircle className="h-6 w-6 text-red-600 mt-0.5" />
               <div>
@@ -277,13 +282,15 @@ export default function ResourcesPage() {
                       <h4 className="font-bold mb-2">{org.name}</h4>
                       <p className="text-gray-600 text-sm mb-3">{org.description}</p>
                       <div className="space-y-2">
-                        <a
-                          href={`tel:${org.phone.replace(/\s/g, "")}`}
-                          className="flex items-center gap-2 text-primary-600 hover:underline"
-                        >
-                          <Phone className="h-4 w-4" />
-                          {org.phone}
-                        </a>
+                        {org.phone && (
+                          <a
+                            href={`tel:${org.phone.replace(/\s/g, "")}`}
+                            className="flex items-center gap-2 text-primary-600 hover:underline"
+                          >
+                            <Phone className="h-4 w-4" />
+                            {org.phone}
+                          </a>
+                        )}
                         <a
                           href={org.website}
                           target="_blank"

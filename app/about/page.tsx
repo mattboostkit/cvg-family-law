@@ -4,147 +4,201 @@ import { Award, Users, Heart, Shield, ArrowRight, CheckCircle } from "lucide-rea
 
 export const metadata: Metadata = {
   title: "About Us - CVG Family Law",
-  description: "Meet Cora and Bridget, the founders of CVG Family Law. Learn about our approach to family law and our commitment to helping families through difficult times.",
+  description:
+    "Learn how CVG Family Law supports families and survivors across Kent. Meet the founding partners, explore our values, and discover how we work.",
 };
+
+const storyHighlights = [
+  {
+    title: "Built for families navigating crisis",
+    description:
+      "CVG Family Law was created to give people experiencing domestic abuse, separation, or complex children matters a specialist team that blends technical excellence with human warmth.",
+  },
+  {
+    title: "Kent roots, national expertise",
+    description:
+      "From our base in Tunbridge Wells we work with clients across Kent and the South East, drawing on years of experience in leading family practices and the higher courts.",
+  },
+  {
+    title: "Trauma-informed support",
+    description:
+      "Every instruction is handled with safety planning, confidentiality, and survivor wellbeing front of mind. We coordinate closely with refuges, police, and therapists so you are never facing the process alone.",
+  },
+];
 
 const teamMembers = [
   {
     name: "Cora",
-    role: "Senior Partner & Family Law Specialist",
-    image: "/team/cora.jpg",
-    bio: "With over 15 years of experience in family law, Cora brings deep expertise and compassion to every case. She specializes in complex financial matters and high-net-worth divorces, while maintaining a strong commitment to domestic abuse advocacy.",
-    qualifications: [
-      "Resolution Accredited Specialist - Domestic Abuse",
-      "Collaborative Law Practitioner",
-      "Children Law Accreditation",
-      "Member of the Law Society Family Law Panel",
-    ],
+    role: "Founding Partner & Domestic Abuse Specialist",
+    focus:
+      "Leads urgent injunctions, complex financial disputes, and strategic safety planning for survivors and children.",
+    experience:
+      "Former head of a regional family department with over a decade of litigation experience in the Family Court and High Court.",
+    approach:
+      "Calm, decisive representation that keeps clients informed and empowered at every stage.",
   },
   {
     name: "Bridget",
-    role: "Partner & Children Law Expert",
-    image: "/team/bridget.jpg",
-    bio: "Bridget has dedicated her career to protecting children's welfare in family proceedings. With particular expertise in domestic abuse cases, she works tirelessly to ensure the safety and best interests of children are paramount in all decisions.",
-    qualifications: [
-      "Children Law Specialist",
-      "Domestic Abuse Advocate",
-      "Mediation Accredited",
-      "Member of Resolution",
-    ],
+    role: "Founding Partner & Children Law Expert",
+    focus:
+      "Handles sensitive child arrangements, safeguarding applications, and cases involving coercive control.",
+    experience:
+      "Recognised for complex CAO proceedings and multi-agency domestic abuse work, with strong links to local support networks.",
+    approach:
+      "Compassionate advocacy that puts a child’s long-term stability and voice at the centre of decision-making.",
   },
 ];
 
 const values = [
   {
     icon: Heart,
-    title: "Compassion First",
-    description: "We understand the emotional challenges of family breakdown and provide supportive, empathetic guidance through every step.",
+    title: "Compassion with clarity",
+    description:
+      "We listen first, translating complex legal steps into clear plans so you can make decisions with confidence.",
   },
   {
     icon: Shield,
-    title: "Protection & Safety",
-    description: "Specialising in domestic abuse cases, we prioritise your safety and work swiftly to secure necessary protections.",
+    title: "Safety before everything",
+    description:
+      "Emergency protection orders, safe meeting arrangements, and discrete communication channels are built into every case plan.",
   },
   {
     icon: Users,
-    title: "Child-Focused",
-    description: "Children's welfare is paramount in everything we do. We ensure their voices are heard and their needs are met.",
+    title: "Child-centred outcomes",
+    description:
+      "We champion stable, nurturing arrangements and give children a protected voice throughout proceedings.",
   },
   {
     icon: Award,
-    title: "Expert Excellence",
-    description: "With specialist accreditations and years of experience, we provide expert legal advice you can trust.",
+    title: "Relentless standards",
+    description:
+      "Specialist accreditations, detailed preparation, and pragmatic problem-solving deliver results when it matters most.",
+  },
+];
+
+const approachPillars = [
+  {
+    step: "1",
+    title: "Listen & stabilise",
+    detail:
+      "Your first consultation focuses on immediate safety, urgent legal steps, and the practical support network around you.",
+  },
+  {
+    step: "2",
+    title: "Shape the strategy",
+    detail:
+      "We build a tailored roadmap covering protective injunctions, children issues, and financial planning with timelines you can rely on.",
+  },
+  {
+    step: "3",
+    title: "Advocate & adjust",
+    detail:
+      "Regular updates, proactive communication with professionals, and robust representation in negotiations or court.",
+  },
+  {
+    step: "4",
+    title: "Support beyond the order",
+    detail:
+      "Post-order check-ins, links to community resources, and clear next steps so you feel secure long after proceedings end.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-50 to-white py-16">
         <div className="container-main">
           <div className="max-w-4xl mx-auto text-center">
+            <p className="text-sm uppercase tracking-wide text-primary-600 font-semibold mb-3">
+              About CVG Family Law
+            </p>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Meet Your Legal Team
+              The trusted legal partner for families across Kent
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              At CVG Family Law, we&apos;re not just solicitors â€“ we&apos;re your 
-              advocates, supporters, and guides through life&apos;s most challenging moments.
+            <p className="text-xl text-gray-600">
+              We are a modern, trauma-informed family law firm led by partners who have spent their careers protecting survivors, children, and financial security when relationships break down.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="section-padding">
+      <section id="story" className="section-padding">
         <div className="container-main">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-center">Our Story</h2>
-            <div className="prose prose-lg mx-auto text-gray-600">
-              <p className="mb-4">
-                CVG Family Law was founded by Cora and Bridget with a simple yet powerful vision: 
-                to provide exceptional family law services that combine legal expertise with genuine 
-                compassion and understanding.
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Our story</h2>
+              <p className="text-gray-600 mb-4">
+                CVG Family Law was founded to remove the disconnect between superb legal advice and the compassionate, practical support that families in crisis deserve. Having seen firsthand how domestic abuse survivors and parents can feel lost in the system, we designed a firm that acts quickly, communicates transparently, and walks every step with you.
               </p>
-              <p className="mb-4">
-                Based in the heart of Tunbridge Wells, Kent, we&apos;ve built our practice on the 
-                belief that every family deserves access to high-quality legal support during their 
-                most difficult times. Our passion for domestic abuse advocacy and children&apos;s 
-                welfare drives everything we do.
+              <p className="text-gray-600">
+                The name CVG reflects our founding partners and the values we share: care, vigilance, and grit. Today we continue to build a team and partner network who share that commitment to clarity, protection, and lasting change.
               </p>
-              <p>
-                We understand that family law matters are deeply personal. That&apos;s why we take 
-                a forward-thinking, contemporary approach that puts your needs first, offering 
-                practical solutions and emotional support alongside expert legal guidance.
-              </p>
+            </div>
+            <div className="bg-white rounded-2xl shadow-lg p-6 border border-primary-100">
+              <ul className="space-y-5">
+                {storyHighlights.map((item) => (
+                  <li key={item.title}>
+                    <h3 className="text-lg font-semibold text-warmgray-900 mb-1">{item.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team Members */}
-      <section className="section-padding bg-gray-50">
+      <section id="team" className="section-padding bg-gray-50">
         <div className="container-main">
-          <h2 className="text-3xl font-bold mb-12 text-center">Our Founding Partners</h2>
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold mb-2 text-center">Meet the founding partners</h2>
+          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-10">
+            Two senior solicitors with complementary specialisms lead the practice. Together they combine urgent protective work, sophisticated financial settlements, and child-focused advocacy.
+          </p>
+          <div className="grid lg:grid-cols-2 gap-8">
             {teamMembers.map((member) => (
-              <div key={member.name} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
-                  <p className="text-primary-600 font-semibold mb-4">{member.role}</p>
-                  <p className="text-gray-600 mb-6">{member.bio}</p>
+              <article key={member.name} className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-14 w-14 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center text-xl font-bold">
+                    {member.name.charAt(0)}
+                  </div>
                   <div>
-                    <h4 className="font-semibold mb-3">Qualifications & Accreditations:</h4>
-                    <ul className="space-y-2">
-                      {member.qualifications.map((qual) => (
-                        <li key={qual} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-secondary-600 mt-0.5" />
-                          <span className="text-sm text-gray-600">{qual}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <h3 className="text-2xl font-bold">{member.name}</h3>
+                    <p className="text-primary-600 font-semibold">{member.role}</p>
                   </div>
                 </div>
-              </div>
+                <ul className="space-y-4 text-sm text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-secondary-600 mt-0.5" />
+                    <span>{member.focus}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-secondary-600 mt-0.5" />
+                    <span>{member.experience}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-secondary-600 mt-0.5" />
+                    <span>{member.approach}</span>
+                  </li>
+                </ul>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Our Values */}
-      <section className="section-padding">
+      <section id="values" className="section-padding">
         <div className="container-main">
-          <h2 className="text-3xl font-bold mb-12 text-center">Our Values</h2>
+          <h2 className="text-3xl font-bold mb-10 text-center">Guiding values</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value) => {
               const Icon = value.icon;
               return (
-                <div key={value.title} className="text-center">
+                <div key={value.title} className="text-center bg-white rounded-2xl shadow-md p-6">
                   <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Icon className="h-8 w-8 text-primary-600" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{value.title}</h3>
-                  <p className="text-gray-600">{value.description}</p>
+                  <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
                 </div>
               );
             })}
@@ -152,70 +206,39 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Approach */}
-      <section className="section-padding bg-gray-50">
+      <section id="approach" className="section-padding bg-gray-50">
         <div className="container-main">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-center">Our Approach</h2>
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
-                    <span className="text-primary-600">1.</span> Personal & Caring
-                  </h3>
-                  <p className="text-gray-600 ml-6">
-                    We take the time to understand your unique situation and provide tailored 
-                    advice that addresses your specific needs and concerns.
-                  </p>
+          <h2 className="text-3xl font-bold mb-6 text-center">How we work with you</h2>
+          <p className="text-gray-600 text-center max-w-3xl mx-auto mb-10">
+            Whether you need an emergency order or long-term planning, we follow a clear, transparent process so you always understand the next step.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {approachPillars.map((pillar) => (
+              <div key={pillar.step} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-primary-600 font-semibold">
+                    {pillar.step}
+                  </span>
+                  <h3 className="text-lg font-semibold">{pillar.title}</h3>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
-                    <span className="text-primary-600">2.</span> Clear Communication
-                  </h3>
-                  <p className="text-gray-600 ml-6">
-                    We explain complex legal matters in plain English, ensuring you understand 
-                    your options and can make informed decisions.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
-                    <span className="text-primary-600">3.</span> Solution-Focused
-                  </h3>
-                  <p className="text-gray-600 ml-6">
-                    We work towards practical, achievable solutions that minimise conflict and 
-                    promote the best outcomes for all involved, especially children.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
-                    <span className="text-primary-600">4.</span> Day-by-Day Support
-                  </h3>
-                  <p className="text-gray-600 ml-6">
-                    We guide you through each step of the process, providing consistent support 
-                    and regular updates on your case progress.
-                  </p>
-                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">{pillar.detail}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="bg-primary-600 text-white section-padding">
         <div className="container-main text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Let&apos;s Work Together
-          </h2>
+          <h2 className="text-3xl font-bold mb-4">Let&apos;s take the next step together</h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Take the first step towards resolving your family law matters with 
-            compassionate, expert support.
+            Book a free 30-minute consultation and speak directly with a partner about the safest, most effective route forward.
           </p>
           <Link
             href="/contact"
             className="bg-white text-primary-600 px-8 py-4 rounded-md font-semibold hover:bg-gray-50 transition-colors inline-flex items-center gap-2"
           >
-            Book Your Free Consultation
+            Book your consultation
             <ArrowRight className="h-5 w-5" />
           </Link>
         </div>

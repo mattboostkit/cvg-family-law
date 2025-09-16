@@ -53,7 +53,7 @@ export default function Footer() {
                 alt="CVG Family Law" 
                 className="h-8 w-auto"
               />
-              <h3 className="text-lg font-bold">CVG Family Law</h3>
+              <span className="sr-only">CVG Family Law</span>
             </div>
             <p className="text-gray-300 mb-4">
               Forward-thinking family law specialists providing compassionate and expert legal support in Tunbridge Wells, Kent.
