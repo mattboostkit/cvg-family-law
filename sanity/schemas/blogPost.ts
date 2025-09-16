@@ -1,17 +1,25 @@
-// Blog Post Schema - This defines what fields your team can edit
-export default {
+import { defineField, defineType } from 'sanity';
+
+interface BlogPostPreviewSelection {
+  title?: string;
+  author?: string;
+  media?: unknown;
+  publishedAt?: string;
+}
+
+export default defineType({
   name: 'blogPost',
   title: 'Blog Posts',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Article Title',
       type: 'string',
       description: 'The main headline of your article',
-      validation: (Rule: any) => Rule.required().min(10).max(100),
-    },
-    {
+      validation: (rule) => rule.required().min(10).max(100),
+    }),
+    defineField({
       name: 'slug',
       title: 'URL Slug',
       type: 'slug',
@@ -20,16 +28,16 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule: any) => Rule.required(),
-    },
-    {
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'author',
       title: 'Author',
       type: 'reference',
       to: [{ type: 'author' }],
       description: 'Who wrote this article?',
-    },
-    {
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
@@ -38,36 +46,36 @@ export default {
         hotspot: true,
       },
       fields: [
-        {
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative Text',
           description: 'Important for accessibility - describe what the image shows',
-        },
+        }),
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
       description: 'Select which categories this article belongs to',
       of: [{ type: 'reference', to: { type: 'category' } }],
-    },
-    {
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published Date',
       type: 'datetime',
       description: 'When should this article be published?',
       initialValue: () => new Date().toISOString(),
-    },
-    {
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Article Summary',
       type: 'text',
       description: 'A short summary that appears in article previews (2-3 sentences)',
-      validation: (Rule: any) => Rule.max(200),
-    },
-    {
+      validation: (rule) => rule.max(200),
+    }),
+    defineField({
       name: 'body',
       title: 'Article Content',
       type: 'array',
@@ -118,26 +126,26 @@ export default {
           name: 'callToAction',
           title: 'Call to Action Box',
           fields: [
-            {
+            defineField({
               name: 'title',
               type: 'string',
               title: 'CTA Title',
-            },
-            {
+            }),
+            defineField({
               name: 'description',
               type: 'text',
               title: 'CTA Description',
-            },
-            {
+            }),
+            defineField({
               name: 'buttonText',
               type: 'string',
               title: 'Button Text',
-            },
-            {
+            }),
+            defineField({
               name: 'buttonLink',
               type: 'url',
               title: 'Button Link',
-            },
+            }),
           ],
         },
         {
@@ -145,28 +153,28 @@ export default {
           name: 'emergencyBox',
           title: 'Emergency Contact Box',
           fields: [
-            {
+            defineField({
               name: 'title',
               type: 'string',
               title: 'Emergency Title',
               initialValue: 'Need Urgent Help?',
-            },
-            {
+            }),
+            defineField({
               name: 'phoneNumber',
               type: 'string',
               title: 'Emergency Phone',
               initialValue: '07984 782 713',
-            },
-            {
+            }),
+            defineField({
               name: 'message',
               type: 'text',
               title: 'Emergency Message',
-            },
+            }),
           ],
         },
       ],
-    },
-    {
+    }),
+    defineField({
       name: 'tags',
       title: 'Tags',
       type: 'array',
@@ -175,27 +183,27 @@ export default {
       options: {
         layout: 'tags',
       },
-    },
-    {
+    }),
+    defineField({
       name: 'featured',
       title: 'Featured Article',
       type: 'boolean',
       description: 'Should this article be featured on the homepage?',
       initialValue: false,
-    },
-    {
+    }),
+    defineField({
       name: 'seoTitle',
       title: 'SEO Title',
       type: 'string',
       description: 'Title for search engines (leave blank to use main title)',
-    },
-    {
+    }),
+    defineField({
       name: 'seoDescription',
       title: 'SEO Description',
       type: 'text',
       description: 'Description for search engines (leave blank to use excerpt)',
-      validation: (Rule: any) => Rule.max(160),
-    },
+      validation: (rule) => rule.max(160),
+    }),
   ],
   preview: {
     select: {
@@ -204,14 +212,14 @@ export default {
       media: 'mainImage',
       publishedAt: 'publishedAt',
     },
-    prepare(selection: any) {
+    prepare(selection: BlogPostPreviewSelection) {
       const { author, publishedAt } = selection;
+      const subtitleParts = [author ? `by ${author}` : 'No author'];
+      subtitleParts.push(publishedAt ? new Date(publishedAt).toLocaleDateString() : 'Draft');
       return {
         ...selection,
-        subtitle: `${author ? `by ${author}` : 'No author'} • ${
-          publishedAt ? new Date(publishedAt).toLocaleDateString() : 'Draft'
-        }`,
+        subtitle: subtitleParts.join(' • '),
       };
     },
   },
-};
+});

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Shield, Phone, AlertCircle, Heart, Clock, CheckCircle, ArrowRight, X, MapPin, MessageCircle, FileText, Lock, Users, Eye, EyeOff, Home, Download, Smartphone, Camera, ClipboardCheck } from "lucide-react";
 import { siteConfig } from "@/lib/constants";
@@ -9,34 +9,64 @@ import { motion } from "framer-motion";
 export default function DomesticAbusePage() {
   const [showSafetyTip, setShowSafetyTip] = useState(true);
   const [privateMode, setPrivateMode] = useState(false);
+  const [liveAnnouncement, setLiveAnnouncement] = useState("");
+  const quickExitAssistiveId = "quick-exit-instructions";
 
-  // Quick exit function
-  const quickExit = () => {
-    // Replace current page in history
-    window.location.replace("https://www.bbc.co.uk/weather");
-    // Open a new tab with weather site
-    window.open("https://www.google.com", "_newtab");
-  };
+  const heroBadgeText = privateMode
+    ? "Specialist Family Law Solicitors - Kent & South East England"
+    : "Specialist Domestic Abuse Solicitors - Kent & South East England";
+  const heroHeadline = privateMode ? "Confidential Family Law Support" : "You Are Not Alone";
+  const heroSubheadlinePrivate =
+    "Discreet legal expertise for sensitive family matters across Tunbridge Wells, Sevenoaks, Tonbridge, and Kent. We're here 24/7.";
+  const chatCardTitle = privateMode ? "Confidential Online Support" : "Secure Online Chat";
+  const chatCardCta = privateMode ? "Book Discreet Consultation" : "Start Confidential Chat";
+
+  const quickExit = useCallback(() => {
+    const safeUrl = "https://www.google.com";
+    window.open(safeUrl, "_blank", "noopener");
+    window.location.replace(safeUrl);
+  }, []);
 
   // Keyboard shortcut for quick exit (ESC key)
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         quickExit();
       }
     };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, []);
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [quickExit]);
+
+  useEffect(() => {
+    document.body.classList.toggle("private-mode", privateMode);
+    setLiveAnnouncement(
+      privateMode
+        ? "Private mode on. Sensitive content is now obscured."
+        : "Private mode off. Full domestic abuse guidance restored."
+    );
+
+    return () => {
+      document.body.classList.remove("private-mode");
+    };
+  }, [privateMode]);
 
   return (
     <>
+      <div className="sr-only" aria-live="polite">
+        {liveAnnouncement}
+      </div>
+      <p id={quickExitAssistiveId} className="sr-only">
+        Press Escape at any time to leave this page instantly.
+      </p>
       {/* Fixed Quick Exit Button */}
       <div className="fixed top-20 right-4 z-50">
         <button
+          type="button"
           onClick={quickExit}
           className="bg-red-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-700 transition-all transform hover:scale-105 flex items-center gap-2"
-          aria-label="Quick exit - press ESC key"
+          aria-label="Quick exit - press Escape to leave instantly"
+          aria-describedby={quickExitAssistiveId}
         >
           <X className="h-5 w-5" />
           <span className="hidden sm:inline">Quick Exit (ESC)</span>
@@ -68,9 +98,11 @@ export default function DomesticAbusePage() {
                 Call 999
               </a>
               <button
-                onClick={() => setPrivateMode(!privateMode)}
+                type="button"
+                onClick={() => setPrivateMode((prev) => !prev)}
                 className="bg-red-500 text-white px-4 py-2 rounded font-semibold hover:bg-red-400 transition-colors flex items-center gap-2"
                 title="Toggle private browsing mode"
+                aria-pressed={privateMode}
               >
                 {privateMode ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 <span className="hidden sm:inline">{privateMode ? 'Private' : 'Normal'}</span>
@@ -108,7 +140,7 @@ export default function DomesticAbusePage() {
       )}
 
       {/* Hero Section with Enhanced Design */}
-      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-white py-20">
+      <section className={`relative bg-gradient-to-br from-purple-50 via-pink-50 to-white py-20 ${privateMode ? "conceal-sensitive" : ""}`}> 
         <div className="absolute inset-0 bg-gradient-to-br from-purple-100/20 to-transparent"></div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -120,15 +152,21 @@ export default function DomesticAbusePage() {
             <div className="text-center mb-8">
               <span className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
                 <Shield className="h-4 w-4" />
-                Specialist Domestic Abuse Solicitors • Kent & South East England
+                {heroBadgeText}
               </span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center bg-gradient-to-r from-purple-900 to-pink-900 bg-clip-text text-transparent">
-              You Are Not Alone
+              {heroHeadline}
             </h1>
             <p className="text-xl md:text-2xl text-gray-700 mb-10 text-center max-w-3xl mx-auto leading-relaxed">
-              Immediate legal protection for domestic abuse victims across <strong>Tunbridge Wells, 
-              Sevenoaks, Tonbridge, and all of Kent</strong>. We&apos;re here 24/7.
+              {privateMode ? (
+                heroSubheadlinePrivate
+              ) : (
+                <>
+                  Immediate legal protection for domestic abuse victims across <strong>Tunbridge Wells,
+                  Sevenoaks, Tonbridge, and all of Kent</strong>. We&apos;re here 24/7.
+                </>
+              )}
             </p>
             
             {/* Emergency Contact Cards */}
@@ -153,9 +191,9 @@ export default function DomesticAbusePage() {
                 className="bg-purple-600 text-white p-6 rounded-xl shadow-xl"
               >
                 <MessageCircle className="h-8 w-8 mb-3" />
-                <h3 className="font-bold text-lg mb-2">Secure Online Chat</h3>
+                <h3 className="font-bold text-lg mb-2">{chatCardTitle}</h3>
                 <button className="bg-white text-purple-600 px-4 py-2 rounded font-semibold hover:bg-purple-50 transition-colors">
-                  Start Confidential Chat
+                  {chatCardCta}
                 </button>
                 <p className="text-sm mt-2 opacity-90">Encrypted & private</p>
               </motion.div>
@@ -187,7 +225,7 @@ export default function DomesticAbusePage() {
       </section>
 
       {/* Immediate Local Help Section */}
-      <section className="bg-gradient-to-r from-red-50 to-pink-50 py-12">
+      <section className={`bg-gradient-to-r from-red-50 to-pink-50 py-12 ${privateMode ? "conceal-sensitive" : ""}`}> 
         <div className="container-main">
           <motion.div
             initial={{ opacity: 0 }}

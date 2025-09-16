@@ -54,3 +54,18 @@
     @apply py-16 sm:py-20 lg:py-24;
   }
 }
+
+/* Safety helpers for private mode */
+body.private-mode {
+  background-color: #f5f5f5;
+}
+
+body.private-mode .conceal-sensitive {
+  filter: blur(0.45rem);
+  transition: filter 0.2s ease;
+}
+
+body.private-mode .conceal-sensitive:focus-within,
+body.private-mode .conceal-sensitive:hover {
+  filter: blur(0);
+}

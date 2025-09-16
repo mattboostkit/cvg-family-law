@@ -3,15 +3,23 @@ import { deskTool } from 'sanity/desk';
 import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './sanity/schemas';
 
-// IMPORTANT: Replace these with your actual Sanity project details
+function safeEnv(name: string, fallback: string) {
+  const value = process.env[name];
+  if (!value) {
+    console.warn(`Missing ${name} environment variable. Falling back to ${fallback}.`);
+    return fallback;
+  }
+  return value;
+}
+
+const projectId = safeEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', '0f7hvf5c');
+const dataset = safeEnv('NEXT_PUBLIC_SANITY_DATASET', 'production');
+
 export default defineConfig({
   name: 'default',
   title: 'CVG Family Law Content',
-
-  // TODO: Replace with your Sanity project ID and dataset
-  projectId: 'your-project-id', // Find this in manage.sanity.io
-  dataset: 'production', // Usually 'production' or 'development'
-
+  projectId,
+  dataset,
   plugins: [
     deskTool({
       structure: (S) =>
@@ -56,9 +64,8 @@ export default defineConfig({
               ),
           ]),
     }),
-    visionTool(), // Query testing tool
+    visionTool(),
   ],
-
   schema: {
     types: schemaTypes,
   },
