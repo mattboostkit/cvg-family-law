@@ -1,50 +1,12 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { FileText, Download, ExternalLink, BookOpen, Phone, AlertCircle } from "lucide-react";
+import { ResourceLibrary } from "@/components/ResourceLibrary";
+import { BookOpen, Phone, AlertCircle, ExternalLink } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Resources - CVG Family Law",
-  description: "Helpful resources, guides, and support services for family law matters in Tunbridge Wells, Kent.",
+  description: "Comprehensive resource library with downloadable guides, safety planning tools, and legal information for domestic abuse victims and family law matters.",
 };
-
-const guides = [
-  {
-    title: "Understanding No-Fault Divorce",
-    description: "Complete guide to the new divorce process introduced in 2022",
-    icon: FileText,
-    downloadUrl: "#",
-  },
-  {
-    title: "Child Arrangements Checklist",
-    description: "What to consider when making arrangements for children",
-    icon: FileText,
-    downloadUrl: "#",
-  },
-  {
-    title: "Financial Disclosure Guide",
-    description: "How to complete Form E and gather financial information",
-    icon: FileText,
-    downloadUrl: "#",
-  },
-  {
-    title: "Domestic Abuse Safety Plan",
-    description: "Creating a safety plan for you and your children",
-    icon: FileText,
-    downloadUrl: "#",
-  },
-  {
-    title: "Mediation Preparation",
-    description: "How to prepare for family mediation sessions",
-    icon: FileText,
-    downloadUrl: "#",
-  },
-  {
-    title: "Court Process Overview",
-    description: "What to expect when going to family court",
-    icon: FileText,
-    downloadUrl: "#",
-  },
-];
 
 const supportOrganizations = [
   {
@@ -74,11 +36,6 @@ const supportOrganizations = [
         description: "Support services and emergency accommodation",
         website: "https://www.refuge.org.uk/",
       },
-      {
-        name: "Hollie Guard",
-        description: "Personal safety app offering live tracking, duress alerts, and check-ins for anyone at risk.",
-        website: "https://hollieguard.com/",
-      },
     ],
   },
   {
@@ -102,12 +59,6 @@ const supportOrganizations = [
         description: "Support for children and young people",
         website: "https://www.childline.org.uk/",
       },
-      {
-        name: "Gingerbread",
-        phone: "0808 802 0925",
-        description: "Support for single parent families",
-        website: "https://www.gingerbread.org.uk/",
-      },
     ],
   },
   {
@@ -125,79 +76,7 @@ const supportOrganizations = [
         description: "Mental health support and information",
         website: "https://www.mind.org.uk/",
       },
-      {
-        name: "Relate",
-        phone: "0300 003 0396",
-        description: "Relationship counselling and support",
-        website: "https://www.relate.org.uk/",
-      },
     ],
-  },
-  {
-    category: "Financial Support",
-    organizations: [
-      {
-        name: "Citizens Advice",
-        phone: "0800 144 8848",
-        description: "Free advice on benefits, debt, and money",
-        website: "https://www.citizensadvice.org.uk/",
-      },
-      {
-        name: "StepChange",
-        phone: "0800 138 1111",
-        description: "Free debt advice",
-        website: "https://www.stepchange.org/",
-      },
-      {
-        name: "Turn2us",
-        phone: "0808 802 2000",
-        description: "Help accessing welfare benefits and grants",
-        website: "https://www.turn2us.org.uk/",
-      },
-    ],
-  },
-];
-
-const legalTerms = [
-  {
-    term: "Conditional Order",
-    definition: "The first decree in divorce proceedings (previously called decree nisi) confirming entitlement to divorce.",
-  },
-  {
-    term: "Final Order",
-    definition: "The final decree that legally ends the marriage (previously called decree absolute).",
-  },
-  {
-    term: "Non-Molestation Order",
-    definition: "A court order preventing someone from using or threatening violence, harassing, or intimidating you.",
-  },
-  {
-    term: "Occupation Order",
-    definition: "A court order deciding who can live in the family home.",
-  },
-  {
-    term: "Parental Responsibility",
-    definition: "Legal rights and responsibilities for a child, including decisions about education, medical treatment, and religion.",
-  },
-  {
-    term: "Child Arrangements Order",
-    definition: "Court order determining where a child lives and when they spend time with each parent.",
-  },
-  {
-    term: "Form E",
-    definition: "Financial statement form for disclosure of assets, income, and liabilities in divorce proceedings.",
-  },
-  {
-    term: "Clean Break Order",
-    definition: "Financial order preventing future financial claims between ex-spouses.",
-  },
-  {
-    term: "Prohibited Steps Order",
-    definition: "Court order preventing specific actions regarding children without court permission.",
-  },
-  {
-    term: "Specific Issue Order",
-    definition: "Court order resolving specific disputes about children's upbringing.",
   },
 ];
 
@@ -205,73 +84,50 @@ export default function ResourcesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 to-white py-16">
-        <div className="container-main">
+      <section className="bg-gradient-to-br from-blue-50 to-white py-16">
+        <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Resources & Support
+              Resource Library
             </h1>
-            <p className="text-xl text-gray-600">
-              Helpful guides, support services, and legal information to help you 
-              navigate family law matters with confidence.
+            <p className="text-xl text-gray-600 mb-8">
+              Access comprehensive guides, safety planning tools, and legal information
+              designed to help victims of domestic abuse navigate their situation safely.
             </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Downloadable Guides */}
-      <section id="guides" className="section-padding">
-        <div className="container-main">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Free Guides & Checklists
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {guides.map((guide) => {
-              const Icon = guide.icon;
-              return (
-                <div key={guide.title} className="bg-white rounded-lg shadow-md p-6">
-                  <Icon className="h-10 w-10 text-primary-600 mb-4" />
-                  <h3 className="text-lg font-bold mb-2">{guide.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{guide.description}</p>
-                  <button className="text-primary-600 font-semibold inline-flex items-center gap-2 hover:text-primary-700">
-                    <Download className="h-4 w-4" />
-                    Download PDF
-                  </button>
+            {/* Emergency Notice */}
+            <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-lg mb-8 max-w-2xl mx-auto">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="h-6 w-6 text-red-600 mt-0.5 flex-shrink-0" />
+                <div className="text-left">
+                  <p className="font-semibold text-red-800">In immediate danger? Call 999</p>
+                  <p className="text-sm text-red-700">
+                    For urgent legal help, call our 24/7 emergency line:{" "}
+                    <a href="tel:07984782713" className="font-semibold underline">
+                      07984 782 713
+                    </a>
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-          <div className="mt-8 text-center">
-            <p className="text-gray-600">
-              These guides provide general information only. For advice specific to your 
-              situation, please <Link href="/contact" className="text-primary-600 hover:underline">book a consultation</Link>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Support Organizations */}
-      <section id="support" className="section-padding bg-gray-50">
-        <div className="container-main">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Support Organizations
-          </h2>
-          
-          <div id="emergency" className="bg-red-50 border-l-4 border-red-600 p-4 rounded-lg mb-8 max-w-4xl mx-auto">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="h-6 w-6 text-red-600 mt-0.5" />
-              <div>
-                <p className="font-semibold">In immediate danger? Call 999</p>
-                <p className="text-sm text-gray-700">
-                  If you need urgent legal help, call us on {" "}
-                  <a href={`tel:07984782713`} className="font-semibold underline">
-                    07984 782 713
-                  </a>
-                </p>
               </div>
             </div>
           </div>
-          
+        </div>
+      </section>
+
+      {/* Resource Library */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <ResourceLibrary />
+        </div>
+      </section>
+
+      {/* Additional Support Services */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-8 text-center">
+            Additional Support Services
+          </h2>
+
           <div className="space-y-8 max-w-5xl mx-auto">
             {supportOrganizations.map((category) => (
               <div key={category.category}>
@@ -285,7 +141,7 @@ export default function ResourcesPage() {
                         {org.phone && (
                           <a
                             href={`tel:${org.phone.replace(/\s/g, "")}`}
-                            className="flex items-center gap-2 text-primary-600 hover:underline"
+                            className="flex items-center gap-2 text-blue-600 hover:underline"
                           >
                             <Phone className="h-4 w-4" />
                             {org.phone}
@@ -295,7 +151,7 @@ export default function ResourcesPage() {
                           href={org.website}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-primary-600 hover:underline"
+                          className="flex items-center gap-2 text-blue-600 hover:underline"
                         >
                           <ExternalLink className="h-4 w-4" />
                           Visit website
@@ -310,44 +166,31 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Legal Glossary */}
-      <section className="section-padding">
-        <div className="container-main">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Legal Terms Explained
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <div className="space-y-4">
-                {legalTerms.map((item) => (
-                  <div key={item.term} className="border-b border-gray-200 pb-4 last:border-0">
-                    <h3 className="font-bold text-lg mb-1">{item.term}</h3>
-                    <p className="text-gray-600">{item.definition}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="bg-primary-600 text-white section-padding">
-        <div className="container-main text-center">
+      <section className="bg-blue-600 text-white py-16">
+        <div className="container mx-auto px-4 text-center">
           <BookOpen className="h-12 w-12 mx-auto mb-4" />
           <h2 className="text-3xl font-bold mb-4">
-            Need Personalised Advice?
+            Need Personalised Legal Advice?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            While these resources are helpful, every situation is unique. Get expert advice 
-            tailored to your specific circumstances.
+            While these resources provide valuable information, every situation is unique.
+            Get expert legal advice tailored to your specific circumstances.
           </p>
-          <Link
-            href="/contact"
-            className="bg-white text-primary-600 px-8 py-4 rounded-md font-semibold hover:bg-gray-50 transition-colors inline-block"
-          >
-            Book Your Free Consultation
-          </Link>
+          <div className="space-x-4">
+            <Link
+              href="/contact"
+              className="bg-white text-blue-600 px-8 py-4 rounded-md font-semibold hover:bg-gray-50 transition-colors inline-block"
+            >
+              Book Free Consultation
+            </Link>
+            <a
+              href="tel:07984782713"
+              className="border-2 border-white text-white px-8 py-4 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition-colors inline-block"
+            >
+              Call Emergency Line
+            </a>
+          </div>
         </div>
       </section>
     </>

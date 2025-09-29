@@ -6,18 +6,43 @@ import Footer from "@/components/layout/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import ScrollToTop from "@/components/ScrollToTop";
 import FloatingConsultation from "@/components/FloatingConsultation";
+import EmergencySystem from "@/components/EmergencySystem";
+import SkipLinks from "@/components/SkipLinks";
+import AccessibilityControls from "@/components/AccessibilityControls";
+import PerformanceDashboard from "@/components/PerformanceDashboard";
+import { WebVitalsTracker } from "@/lib/web-vitals";
+import { initializeAccessibility } from "@/lib/accessibility";
 import { siteConfig } from "@/lib/constants";
+import {
+  organizationSchema,
+  localBusinessSchema,
+  emergencyContactSchema,
+  domesticAbuseServiceSchema,
+  faqSchema,
+  reviewSolicitorsWidgetSchema,
+  sraApprovalSchema
+} from "@/lib/schema";
+import {
+  voiceSearchSchema,
+  locationBasedVoiceSchema,
+  emergencyVoiceSchema
+} from "@/lib/voice-search-schema";
 import "./globals.css";
+import "./accessibility.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+  preload: true,
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-dm-sans",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -27,15 +52,30 @@ export const metadata: Metadata = {
     template: "%s | CVG Family Law",
   },
   description:
-    "Forward-thinking family law firm specialising in domestic abuse, children law, divorce, and financial matters. Compassionate legal support for families in Tunbridge Wells and across Kent.",
+    "24/7 emergency family law support for domestic abuse victims in Kent. Expert solicitors providing immediate protection orders, non-molestation orders & urgent legal help. Free consultation. SRA regulated.",
   keywords: [
-    "family law",
-    "domestic abuse solicitor",
-    "divorce lawyer",
-    "children law",
-    "Tunbridge Wells",
-    "Kent",
-    "emergency injunctions",
+    // Core Services
+    "family law", "domestic abuse solicitor", "divorce lawyer", "children law",
+
+    // Location-based
+    "Tunbridge Wells", "Kent", "Sevenoaks", "Maidstone", "Tonbridge",
+
+    // Emergency & Crisis Keywords
+    "emergency injunctions", "emergency protection order", "urgent legal help",
+    "crisis legal support", "domestic violence lawyer", "restraining order",
+    "non-molestation order", "occupation order", "immediate court order",
+    "24/7 legal help", "emergency family lawyer", "urgent injunction",
+    "immediate legal protection", "domestic abuse emergency",
+
+    // Specific Legal Terms
+    "family law Tunbridge Wells", "domestic abuse Kent", "emergency solicitor",
+    "protection order Kent", "family court emergency", "urgent divorce",
+    "child protection order", "domestic violence injunction",
+
+    // Help-Seeking Keywords
+    "need help now", "legal help domestic abuse", "emergency family law",
+    "immediate legal advice", "crisis family lawyer", "urgent court order",
+    "emergency child protection", "immediate family lawyer"
   ],
   authors: [{ name: "CVG Family Law" }],
   creator: "CVG Family Law",
@@ -47,9 +87,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "CVG Family Law - Family Law Specialists in Tunbridge Wells, Kent",
+    title: "CVG Family Law - 24/7 Emergency Family Law Support in Kent",
     description:
-      "Expert family law services for domestic abuse survivors, children matters, divorce, and financial settlements. Free 30-minute consultation.",
+      "Urgent legal help for domestic abuse victims. Emergency protection orders, non-molestation orders & immediate court injunctions. 24/7 crisis support across Kent.",
     url: siteConfig.url,
     siteName: "CVG Family Law",
     locale: "en_GB",
@@ -57,52 +97,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CVG Family Law - Tunbridge Wells Family Law Solicitors",
+    title: "CVG Family Law - Emergency Domestic Abuse Solicitors Kent",
     description:
-      "Specialist domestic abuse and family law solicitors supporting families across Kent.",
+      "24/7 urgent legal support for domestic abuse victims. Emergency protection orders & immediate family law help across Tunbridge Wells, Sevenoaks, Maidstone & Tonbridge.",
   },
 };
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "LegalService",
-  name: siteConfig.name,
-  url: siteConfig.url,
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  image: `${siteConfig.url}/logos/Logo_Flat.svg`,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: siteConfig.address.street,
-    addressLocality: siteConfig.address.city,
-    addressRegion: siteConfig.address.county,
-    postalCode: siteConfig.address.postcode,
-    addressCountry: "GB",
-  },
-  areaServed: ["Tunbridge Wells", "Sevenoaks", "Maidstone", "Kent"],
-  priceRange: "Consultation from GBP 0",
-  sameAs: Object.values(siteConfig.social),
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      opens: "09:00",
-      closes: "17:30",
-    },
-  ],
-  serviceType: [
-    "Domestic Abuse Support",
-    "Children Law",
-    "Divorce & Separation",
-    "Family Financial Matters"
-  ],
-};
 
 export default function RootLayout({
   children,
@@ -112,15 +112,94 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
+        {/* Initialize accessibility features */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (${initializeAccessibility.toString()})();
+            `,
+          }}
+        />
+
+        {/* Skip Links for keyboard navigation */}
+        <SkipLinks />
+
+        {/* Emergency System - loads first and is always visible */}
+        <EmergencySystem variant="banner" />
+
         <EnhancedHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1" role="main" aria-label="Main content">
+          {children}
+        </main>
         <Footer />
         <ScrollToTop />
         <FloatingConsultation />
         <CookieBanner />
+
+        {/* Full Emergency System Modal */}
+        <EmergencySystem variant="full" />
+
+        {/* Accessibility Controls */}
+        <AccessibilityControls variant="floating" position="bottom-right" />
+
+        {/* Performance Dashboard (Development Only) */}
+        {process.env.NODE_ENV === 'development' && <PerformanceDashboard />}
+
+        {/* Comprehensive Schema Markup for SEO */}
         <Script id="ld-json-org" type="application/ld+json">
           {JSON.stringify(organizationSchema)}
         </Script>
+        <Script id="ld-json-local" type="application/ld+json">
+          {JSON.stringify(localBusinessSchema)}
+        </Script>
+        <Script id="ld-json-emergency" type="application/ld+json">
+          {JSON.stringify(emergencyContactSchema)}
+        </Script>
+        <Script id="ld-json-service" type="application/ld+json">
+          {JSON.stringify(domesticAbuseServiceSchema)}
+        </Script>
+        <Script id="ld-json-faq" type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </Script>
+        <Script id="ld-json-reviews" type="application/ld+json">
+          {JSON.stringify(reviewSolicitorsWidgetSchema)}
+        </Script>
+        <Script id="ld-json-sra" type="application/ld+json">
+          {JSON.stringify(sraApprovalSchema)}
+        </Script>
+        <Script id="ld-json-voice-search" type="application/ld+json">
+          {JSON.stringify(voiceSearchSchema)}
+        </Script>
+        <Script id="ld-json-location-voice" type="application/ld+json">
+          {JSON.stringify(locationBasedVoiceSchema)}
+        </Script>
+        <Script id="ld-json-emergency-voice" type="application/ld+json">
+          {JSON.stringify(emergencyVoiceSchema)}
+        </Script>
+
+        {/* Web Vitals Performance Monitoring */}
+        <WebVitalsTracker />
+
+        {/* Service Worker Registration for Emergency Offline Access */}
+        <Script
+          id="service-worker"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                      console.log('[SW] Emergency service worker registered:', registration);
+                    })
+                    .catch((error) => {
+                      console.error('[SW] Emergency service worker registration failed:', error);
+                    });
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );

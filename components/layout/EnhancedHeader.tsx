@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Menu, X, ChevronDown, Phone, Mail, MapPin, 
+import {
+  Menu, X, ChevronDown, Phone, Mail, MapPin,
   Shield, Heart, Users, Calculator, Clock,
-  ArrowRight, AlertTriangle
+  ArrowRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/constants";
@@ -58,6 +59,7 @@ export default function EnhancedHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,54 +92,18 @@ export default function EnhancedHeader() {
     }, 100);
   };
 
-  const handleQuickExit = () => {
-    window.open("https://www.google.com", "_newtab");
-    window.location.replace("https://www.google.com");
-  };
 
   return (
     <>
-      {/* Emergency Banner */}
-      <motion.div 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="bg-gradient-to-r from-red-600 to-red-700 text-white relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="container-main py-2 relative">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6 flex-wrap">
-              <div className="flex items-center gap-2">
-                <AlertTriangle className="h-4 w-4 animate-pulse" />
-                <span className="font-semibold text-sm">Need Urgent Help?</span>
-                <span className="hidden sm:inline text-sm opacity-90">
-                  In danger? Call 999 immediately
-                </span>
-              </div>
-              <a
-                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-              >
-                <Phone className="h-3 w-3" />
-                <span className="text-sm font-medium">{siteConfig.phone}</span>
-              </a>
-            </div>
-            <button
-              onClick={handleQuickExit}
-              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm px-3 py-1 rounded text-xs font-semibold transition-all hover:scale-105"
-            >
-              Quick Exit →
-            </button>
-          </div>
-        </div>
-      </motion.div>
-
       {/* Main Header */}
-      <header 
+      <header
+        id="navigation"
+        role="banner"
         className={cn(
           "sticky top-0 z-50 bg-white transition-all duration-300",
           isScrolled ? "shadow-lg" : "shadow-sm"
         )}
+        aria-label="Main site navigation"
       >
         {/* Top Bar */}
         <div className="hidden lg:block border-b border-gray-100">
@@ -181,14 +147,18 @@ export default function EnhancedHeader() {
           )}>
             {/* Logo */}
             <Link href="/" className="group">
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="transition-transform"
               >
-                <img 
-                  src="/logos/Logo_Flat.svg" 
-                  alt="CVG Family Law" 
+                <Image
+                  src="/logos/Logo_Flat.svg"
+                  alt="CVG Family Law"
+                  width={200}
+                  height={48}
                   className="h-12 w-auto"
+                  priority
+                  sizes="(max-width: 768px) 150px, 200px"
                 />
               </motion.div>
             </Link>
@@ -365,13 +335,18 @@ export default function EnhancedHeader() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2"
-              aria-label="Toggle menu"
+              className="lg:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
+              <span className="sr-only">
+                {isMobileMenuOpen ? "Close" : "Open"} navigation menu
+              </span>
               {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6" aria-hidden="true" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -381,11 +356,15 @@ export default function EnhancedHeader() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
+              id="mobile-navigation"
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 20 }}
               className="fixed inset-0 top-[60px] bg-white z-50 lg:hidden overflow-y-auto"
+              role="navigation"
+              aria-label="Mobile navigation menu"
+              aria-modal="true"
             >
               <div className="container-main py-6">
                 <div className="space-y-6">

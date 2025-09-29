@@ -1,0 +1,512 @@
+/* Accessibility Styles for WCAG 2.1 AA Compliance */
+
+/* ==========================================
+   BASE ACCESSIBILITY STYLES
+   ========================================== */
+
+/* Ensure minimum color contrast ratios */
+:root {
+  --color-text-primary: #000000;
+  --color-text-secondary: #333333;
+  --color-text-inverse: #ffffff;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-border: #dee2e6;
+  --color-focus: #0066cc;
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: inherit !important;
+  margin: inherit !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: inherit !important;
+}
+
+/* Skip links styles */
+.skip-links {
+  position: relative;
+  z-index: 9999;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-focus);
+  color: var(--color-text-inverse);
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: top 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.skip-link:focus {
+  top: 6px;
+  outline: 2px solid var(--color-text-inverse);
+  outline-offset: 2px;
+}
+
+/* Enhanced touch targets */
+.touch-target-enhanced {
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+/* ==========================================
+   FOCUS MANAGEMENT
+   ========================================== */
+
+/* Enhanced focus indicators for all interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: 0 0 0 1px var(--color-bg-primary);
+}
+
+/* Focus indicators for mouse users (hide when not using keyboard) */
+.js-focus-visible button:focus:not(.focus-visible),
+.js-focus-visible a:focus:not(.focus-visible),
+.js-focus-visible input:focus:not(.focus-visible),
+.js-focus-visible select:focus:not(.focus-visible),
+.js-focus-visible textarea:focus:not(.focus-visible),
+.js-focus-visible [tabindex]:focus:not(.focus-visible) {
+  outline: none;
+}
+
+/* Ensure focus is always visible for keyboard users */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ==========================================
+   REDUCED MOTION PREFERENCES
+   ========================================== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable parallax and transform animations */
+  [style*="transform"],
+  [style*="animation"] {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* Custom reduced motion class for JavaScript control */
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.reduce-motion [style*="transform"],
+.reduce-motion [style*="animation"] {
+  transform: none !important;
+  animation: none !important;
+}
+
+/* ==========================================
+   HIGH CONTRAST MODE
+   ========================================== */
+
+/* High contrast mode styles */
+.high-contrast {
+  --color-text-primary: #000000;
+  --color-text-secondary: #000000;
+  --color-text-inverse: #ffffff;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #ffffff;
+  --color-border: #000000;
+  --color-focus: #0000ff;
+}
+
+/* High contrast color overrides */
+.high-contrast * {
+  border-color: var(--color-border) !important;
+}
+
+/* High contrast button styles */
+.high-contrast button {
+  border: 2px solid var(--color-text-primary) !important;
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.high-contrast button:hover,
+.high-contrast button:focus {
+  background-color: var(--color-text-primary) !important;
+  color: var(--color-bg-primary) !important;
+}
+
+/* High contrast link styles */
+.high-contrast a {
+  color: var(--color-focus) !important;
+  text-decoration: underline !important;
+}
+
+.high-contrast a:hover,
+.high-contrast a:focus {
+  background-color: var(--color-focus) !important;
+  color: var(--color-text-inverse) !important;
+}
+
+/* High contrast form elements */
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  border: 2px solid var(--color-text-primary) !important;
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.high-contrast input:focus,
+.high-contrast select:focus,
+.high-contrast textarea:focus {
+  border-color: var(--color-focus) !important;
+  box-shadow: 0 0 0 2px var(--color-focus) !important;
+}
+
+/* ==========================================
+   LARGE TEXT MODE
+   ========================================== */
+
+.large-text {
+  font-size: 112.5% !important;
+}
+
+.large-text body {
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+}
+
+.large-text h1,
+.large-text h2,
+.large-text h3,
+.large-text h4,
+.large-text h5,
+.large-text h6 {
+  font-size: 1.2em !important;
+}
+
+/* ==========================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================== */
+
+/* Emergency elements - always high contrast and accessible */
+[aria-label*="emergency"],
+[aria-label*="crisis"],
+.emergency,
+.crisis {
+  color: #dc3545 !important;
+  font-weight: 700 !important;
+  border: 2px solid #dc3545 !important;
+}
+
+[aria-label*="emergency"]:focus,
+[aria-label*="crisis"]:focus,
+.emergency:focus,
+.crisis:focus {
+  outline: 3px solid #dc3545 !important;
+  outline-offset: 2px !important;
+}
+
+/* Ensure minimum touch target sizes */
+@media (pointer: coarse) {
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Improve text readability */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
+
+/* Enhanced heading hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* Improve link accessibility */
+a {
+  color: #0066cc;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover,
+a:focus {
+  color: #004499;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* Form accessibility improvements */
+label {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+input,
+select,
+textarea {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+}
+
+/* Error states */
+.error {
+  color: #dc3545;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.error::before {
+  content: "⚠ ";
+}
+
+/* Success states */
+.success {
+  color: #28a745;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.success::before {
+  content: "✓ ";
+}
+
+/* ==========================================
+   ARIA LANDMARKS
+   ========================================== */
+
+/* Main content area */
+main,
+[role="main"] {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  min-height: 50vh;
+}
+
+/* Navigation landmarks */
+nav,
+[role="navigation"] {
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Complementary content */
+aside,
+[role="complementary"] {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+/* Content sections */
+section,
+[role="region"] {
+  margin-bottom: 2rem;
+}
+
+/* ==========================================
+   ACCESSIBILITY ANIMATIONS
+   ========================================== */
+
+/* Subtle animations that respect motion preferences */
+@media (prefers-reduced-motion: no-preference) {
+  .accessibility-fade-in {
+    animation: accessibility-fade-in 0.3s ease-out;
+  }
+
+  .accessibility-slide-up {
+    animation: accessibility-slide-up 0.3s ease-out;
+  }
+}
+
+@keyframes accessibility-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes accessibility-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+
+@media print {
+  /* Ensure sufficient contrast in print */
+  * {
+    color: #000000 !important;
+    background: #ffffff !important;
+  }
+
+  /* Show link URLs in print */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666666;
+  }
+
+  /* Don't show interactive elements in print */
+  button,
+  input,
+  select,
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY TESTING
+   ========================================== */
+
+/* Visual indicators for accessibility testing */
+.accessibility-test-outline * {
+  outline: 1px solid red !important;
+}
+
+.accessibility-test-contrast * {
+  background: #ffff00 !important;
+  color: #000000 !important;
+}
+
+/* Show focus targets for testing */
+.accessibility-test-focus *:focus-visible {
+  outline: 5px solid #ff0000 !important;
+  outline-offset: 3px !important;
+}
+
+/* ==========================================
+   RESPONSIVE ACCESSIBILITY
+   ========================================== */
+
+/* Larger touch targets on mobile */
+@media (max-width: 768px) {
+  button,
+  a,
+  input,
+  select,
+  [role="button"] {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+
+  /* Larger text on mobile */
+  body {
+    font-size: 1.1rem;
+  }
+}
+
+/* High contrast media query support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text-primary: #000000;
+    --color-bg-primary: #ffffff;
+    --color-border: #000000;
+    --color-focus: #0000ff;
+  }
+}
+
+/* Dark mode accessibility (if implemented) */
+@media (prefers-color-scheme: dark) {
+  .auto-dark-mode {
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #cccccc;
+    --color-bg-primary: #1a1a1a;
+    --color-bg-secondary: #2d2d2d;
+    --color-border: #404040;
+  }
+}

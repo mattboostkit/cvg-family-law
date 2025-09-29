@@ -8,6 +8,10 @@ const routes = [
   "/services/children-law",
   "/services/divorce",
   "/services/financial",
+  "/services/areas/tunbridge-wells",
+  "/services/areas/sevenoaks",
+  "/services/areas/maidstone",
+  "/services/areas/tonbridge",
   "/resources",
   "/faq",
   "/blog",
@@ -27,7 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteConfig.url}${path}`,
       lastModified,
       changeFrequency,
-      priority: path === "/services/domestic-abuse" ? 0.9 : 0.7,
+      priority: path === "/services/domestic-abuse" ? 0.9
+        : path.startsWith("/services/areas/") ? 0.8
+        : 0.7,
     } satisfies MetadataRoute.Sitemap[number];
   });
 

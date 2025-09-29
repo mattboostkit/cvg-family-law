@@ -3,56 +3,142 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote, Star, Play, Shield } from "lucide-react";
 import { images } from "@/lib/images";
+import { Testimonial, TestimonialCarouselProps } from "@/types/testimonials";
+import VideoTestimonialPlayer from "./VideoTestimonialPlayer";
+import TestimonialVerificationBadge from "./TestimonialVerificationBadge";
 
-const testimonials = [
+// Sample testimonials data using the new system
+const sampleTestimonials: Testimonial[] = [
   {
-    id: 1,
-    name: "Sarah Mitchell",
-    role: "Divorce Client",
-    image: images.testimonials.sarah,
+    id: "testimonial_1",
+    type: "text",
+    author: {
+      id: "author_1",
+      name: "Sarah Mitchell",
+      caseType: "Divorce Proceedings",
+      isAnonymous: false
+    },
+    content: "CVG Family Law provided exceptional support during my divorce. Their compassionate approach and expertise made a difficult time so much easier. They truly care about their clients' wellbeing.",
+    caseOutcome: "successful",
     rating: 5,
-    text: "CVG Family Law provided exceptional support during my divorce. Their compassionate approach and expertise made a difficult time so much easier. They truly care about their clients' wellbeing.",
-    highlight: "Compassionate & Professional",
+    tags: ["divorce", "compassionate", "professional"],
+    verificationStatus: "verified",
+    verificationDocuments: [],
+    privacySettings: {
+      level: "public",
+      allowVideoBlurring: false,
+      allowVoiceAlteration: false,
+      allowNameDisplay: true,
+      allowLocationDisplay: false,
+      consentWithdrawn: false
+    },
+    isPublished: true,
+    createdAt: new Date("2024-01-15"),
+    updatedAt: new Date("2024-01-15"),
+    viewCount: 45,
+    helpfulCount: 12
   },
   {
-    id: 2,
-    name: "Michael Thompson",
-    role: "Children Law Client",
-    image: images.testimonials.michael,
+    id: "testimonial_2",
+    type: "text",
+    author: {
+      id: "author_2",
+      name: "Michael Thompson",
+      caseType: "Children Law",
+      isAnonymous: false
+    },
+    content: "The team fought tirelessly for my children's best interests. Their knowledge of children law is outstanding, and they always kept me informed throughout the process.",
+    caseOutcome: "successful",
     rating: 5,
-    text: "The team fought tirelessly for my children's best interests. Their knowledge of children law is outstanding, and they always kept me informed throughout the process.",
-    highlight: "Outstanding Expertise",
+    tags: ["children_law", "expertise", "communication"],
+    verificationStatus: "verified",
+    verificationDocuments: [],
+    privacySettings: {
+      level: "public",
+      allowVideoBlurring: false,
+      allowVoiceAlteration: false,
+      allowNameDisplay: true,
+      allowLocationDisplay: false,
+      consentWithdrawn: false
+    },
+    isPublished: true,
+    createdAt: new Date("2024-02-20"),
+    updatedAt: new Date("2024-02-20"),
+    viewCount: 32,
+    helpfulCount: 8
   },
   {
-    id: 3,
-    name: "Emma Williams",
-    role: "Domestic Abuse Survivor",
-    image: images.testimonials.emma,
+    id: "testimonial_3",
+    type: "video",
+    author: {
+      id: "author_3",
+      name: "Emma Williams",
+      caseType: "Domestic Abuse",
+      isAnonymous: false
+    },
+    content: "CVG Family Law saved my life. They secured protection orders quickly and supported me every step of the way. I cannot thank them enough for their dedication and care.",
+    caseOutcome: "successful",
     rating: 5,
-    text: "CVG Family Law saved my life. They secured protection orders quickly and supported me every step of the way. I cannot thank them enough for their dedication and care.",
-    highlight: "Life-Changing Support",
+    tags: ["domestic_abuse", "protection", "support"],
+    verificationStatus: "verified",
+    verificationDocuments: [],
+    privacySettings: {
+      level: "public",
+      allowVideoBlurring: false,
+      allowVoiceAlteration: false,
+      allowNameDisplay: true,
+      allowLocationDisplay: false,
+      consentWithdrawn: false
+    },
+    isPublished: true,
+    videoMetadata: {
+      duration: 120,
+      resolution: { width: 1920, height: 1080 },
+      thumbnailUrl: "/images/testimonials/emma-video-thumb.jpg",
+      transcript: "CVG Family Law saved my life. They secured protection orders quickly and supported me every step of the way...",
+      hasBlurredFaces: false,
+      hasAlteredVoice: false,
+      fileSize: 50 * 1024 * 1024, // 50MB
+      mimeType: "video/mp4"
+    },
+    createdAt: new Date("2024-03-10"),
+    updatedAt: new Date("2024-03-10"),
+    viewCount: 67,
+    helpfulCount: 23
   },
 ];
 
-export default function TestimonialCarousel() {
+interface EnhancedTestimonialCarouselProps extends Omit<TestimonialCarouselProps, 'testimonials'> {
+  testimonials?: Testimonial[];
+}
+
+export default function TestimonialCarousel({
+  testimonials = sampleTestimonials,
+  showVerificationBadges = true,
+  showVideoControls = true,
+  autoplay = true,
+  showThumbnails = false,
+  itemsPerView = 1,
+  className = ""
+}: EnhancedTestimonialCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(autoplay);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 7000); // Slower for video testimonials
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, testimonials.length]);
 
   const goToPrevious = () => {
     setIsAutoPlaying(false);
-    setCurrentIndex((prev) => 
+    setCurrentIndex((prev) =>
       prev === 0 ? testimonials.length - 1 : prev - 1
     );
   };
@@ -66,6 +152,8 @@ export default function TestimonialCarousel() {
     setIsAutoPlaying(false);
     setCurrentIndex(index);
   };
+
+  const currentTestimonial = testimonials[currentIndex];
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-primary-50 relative overflow-hidden">
@@ -104,69 +192,108 @@ export default function TestimonialCarousel() {
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                   className="p-8 md:p-12"
                 >
-                  <div className="grid md:grid-cols-3 gap-8 items-center">
-                    {/* Image and Info */}
-                    <div className="md:col-span-1 text-center">
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="relative w-32 h-32 mx-auto mb-4"
-                      >
-                        <Image
-                          src={testimonials[currentIndex].image}
-                          alt={testimonials[currentIndex].name}
-                          fill
-                          className="rounded-full object-cover"
-                        />
-                        <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center">
-                          <Quote className="h-6 w-6 text-white" />
+                  <div className="space-y-6">
+                    {/* Testimonial Content */}
+                    <div className="relative">
+                      {currentTestimonial.type === 'video' ? (
+                        <div className="space-y-4">
+                          <VideoTestimonialPlayer
+                            testimonial={currentTestimonial}
+                            autoplay={false}
+                            showControls={showVideoControls}
+                            className="w-full"
+                          />
                         </div>
-                      </motion.div>
-                      
-                      <h3 className="text-xl font-bold text-warmgray-900">
-                        {testimonials[currentIndex].name}
-                      </h3>
-                      <p className="text-warmgray-600 text-sm">
-                        {testimonials[currentIndex].role}
-                      </p>
-                      
-                      {/* Rating */}
-                      <div className="flex justify-center gap-1 mt-3">
-                        {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.3 + i * 0.1 }}
+                      ) : (
+                        <div className="space-y-4">
+                          <div className="relative">
+                            <Quote className="absolute -top-4 -left-4 h-12 w-12 text-primary-200" />
+                            <p className="text-lg md:text-xl text-warmgray-700 italic leading-relaxed relative z-10 pl-8">
+                              &ldquo;{currentTestimonial.content}&rdquo;
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-4">
+                            {/* Verification Badge */}
+                            {showVerificationBadges && (
+                              <TestimonialVerificationBadge
+                                testimonial={currentTestimonial}
+                                size="sm"
+                              />
+                            )}
+
+                            {/* Rating */}
+                            {currentTestimonial.rating && (
+                              <div className="flex items-center gap-1">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star
+                                    key={i}
+                                    className={`h-4 w-4 ${
+                                      i < currentTestimonial.rating! ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'
+                                    }`}
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Author Info */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                          {currentTestimonial.author.isAnonymous ? (
+                            <Shield className="h-6 w-6 text-white" />
+                          ) : (
+                            <span className="text-white font-semibold text-lg">
+                              {currentTestimonial.author.initials || currentTestimonial.author.name?.charAt(0) || 'C'}
+                            </span>
+                          )}
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-bold text-warmgray-900">
+                            {currentTestimonial.author.isAnonymous
+                              ? 'Anonymous Client'
+                              : currentTestimonial.author.name || 'Client'
+                            }
+                          </h3>
+                          <p className="text-warmgray-600 text-sm">
+                            {currentTestimonial.author.caseType} • {currentTestimonial.caseOutcome.replace('_', ' ')}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-1 max-w-48">
+                        {currentTestimonial.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-block bg-primary-100 text-primary-700 px-2 py-1 rounded text-xs"
                           >
-                            <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                          </motion.div>
+                            {tag.replace('_', ' ')}
+                          </span>
                         ))}
+                        {currentTestimonial.tags.length > 3 && (
+                          <span className="inline-block bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
+                            +{currentTestimonial.tags.length - 3}
+                          </span>
+                        )}
                       </div>
                     </div>
 
-                    {/* Testimonial Text */}
-                    <div className="md:col-span-2">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <div className="relative">
-                          <Quote className="absolute -top-4 -left-4 h-12 w-12 text-primary-200" />
-                          <p className="text-lg md:text-xl text-warmgray-700 italic leading-relaxed relative z-10">
-                            &ldquo;{testimonials[currentIndex].text}&rdquo;
-                          </p>
-                        </div>
-                        
-                        <div className="mt-6">
-                          <span className="inline-block bg-gradient-to-r from-primary-600 to-primary-700 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                            {testimonials[currentIndex].highlight}
-                          </span>
-                        </div>
-                      </motion.div>
-                    </div>
+                    {/* Verification Details */}
+                    {showVerificationBadges && (
+                      <div className="pt-4 border-t border-gray-100">
+                        <TestimonialVerificationBadge
+                          testimonial={currentTestimonial}
+                          showDetails={false}
+                          size="sm"
+                        />
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -192,9 +319,9 @@ export default function TestimonialCarousel() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
+            {testimonials.map((testimonial, index) => (
               <motion.button
-                key={index}
+                key={testimonial.id}
                 onClick={() => goToSlide(index)}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}

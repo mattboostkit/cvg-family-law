@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock, Facebook, Linkedin, Instagram, Shield, Award, Scale, Heart } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, MapPin, Clock, Facebook, Linkedin, Instagram, Award, Scale, Heart } from "lucide-react";
 import { siteConfig, services } from "@/lib/constants";
+import SRAApprovalBadge from "@/components/SRAApprovalBadge";
 
 export default function Footer() {
   return (
@@ -12,11 +14,9 @@ export default function Footer() {
         <div className="container-main py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center">
-                <Shield className="h-6 w-6 text-primary-400" />
-              </div>
-              <h4 className="font-semibold text-sm">SRA Regulated</h4>
-              <p className="text-xs text-gray-400">No: {siteConfig.sra}</p>
+              <SRAApprovalBadge variant="minimal" />
+              <h4 className="font-semibold text-sm">SRA Approved</h4>
+              <p className="text-xs text-gray-400">Solicitors Regulation Authority</p>
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center">
@@ -48,9 +48,11 @@ export default function Footer() {
           {/* About Section */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <img 
-                src="/logos/Logo_Flat_White.svg" 
-                alt="CVG Family Law" 
+              <Image
+                src="/logos/Logo_Flat_White.svg"
+                alt="CVG Family Law"
+                width={120}
+                height={32}
                 className="h-8 w-auto"
               />
               <span className="sr-only">CVG Family Law</span>
