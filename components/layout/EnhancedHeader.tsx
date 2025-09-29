@@ -146,31 +146,26 @@ export default function EnhancedHeader() {
             isScrolled ? "py-3" : "py-4"
           )}>
             {/* Logo */}
-            <Link href="/" className="group">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="transition-transform"
-              >
-                <Image
-                  src="/logos/Logo_Flat.svg"
-                  alt="CVG Family Law"
-                  width={200}
-                  height={48}
-                  className="h-12 w-auto"
-                  priority
-                  sizes="(max-width: 768px) 150px, 200px"
-                />
-              </motion.div>
+            <Link href="/">
+              <Image
+                src="/logos/Logo_Flat.svg"
+                alt="CVG Family Law"
+                width={150}
+                height={36}
+                className="h-9 w-auto"
+                style={{ height: 'auto' }}
+                priority
+                sizes="(max-width: 768px) 120px, 150px"
+              />
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
-              <Link 
+              <Link
                 href="/"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors relative group"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
               >
                 Home
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all group-hover:w-full"></span>
               </Link>
 
               {/* Services Dropdown */}
@@ -179,13 +174,12 @@ export default function EnhancedHeader() {
                 onMouseEnter={() => handleMouseEnter("services")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className="flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors group">
+                <button className="flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors">
                   Services
                   <ChevronDown className={cn(
                     "h-4 w-4 transition-transform",
                     activeDropdown === "services" && "rotate-180"
                   )} />
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all group-hover:w-full"></span>
                 </button>
                 
                 <AnimatePresence>
@@ -244,13 +238,12 @@ export default function EnhancedHeader() {
                 onMouseEnter={() => handleMouseEnter("about")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className="flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors group">
+                <button className="flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors">
                   About
                   <ChevronDown className={cn(
                     "h-4 w-4 transition-transform",
                     activeDropdown === "about" && "rotate-180"
                   )} />
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all group-hover:w-full"></span>
                 </button>
                 
                 <AnimatePresence>
@@ -281,13 +274,12 @@ export default function EnhancedHeader() {
                 onMouseEnter={() => handleMouseEnter("resources")}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className="flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors group">
+                <button className="flex items-center gap-1 text-gray-700 hover:text-primary-600 font-medium transition-colors">
                   Resources
                   <ChevronDown className={cn(
                     "h-4 w-4 transition-transform",
                     activeDropdown === "resources" && "rotate-180"
                   )} />
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all group-hover:w-full"></span>
                 </button>
                 
                 <AnimatePresence>
@@ -312,12 +304,11 @@ export default function EnhancedHeader() {
                 </AnimatePresence>
               </div>
 
-              <Link 
+              <Link
                 href="/contact"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors relative group"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
               >
                 Contact
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-600 transition-all group-hover:w-full"></span>
               </Link>
 
               {/* CTA Button */}

@@ -3,6 +3,7 @@ import { locales, defaultLocale } from '@/lib/i18n';
 import { getTranslations, getDirection } from '@/lib/i18n';
 import type { SupportedLocale } from '@/types/i18n';
 import { Inter, DM_Sans, Cairo, Noto_Sans_Arabic, Noto_Sans } from 'next/font/google';
+import AccessibilityInit from '@/components/AccessibilityInit';
 
 // Font configurations for different languages
 const inter = Inter({
@@ -91,11 +92,10 @@ export default async function LocaleLayout({
   const fontVariables = getFontVariables(locale);
 
   return (
-    <html lang={locale} dir={direction} className={fontVariables}>
-      <body className="antialiased">
-        {children}
-      </body>
-    </html>
+    <>
+      <AccessibilityInit />
+      {children}
+    </>
   );
 }
 

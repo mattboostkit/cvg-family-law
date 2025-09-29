@@ -112,15 +112,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${dmSans.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
-        {/* Initialize accessibility features */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (${initializeAccessibility.toString()})();
-            `,
-          }}
-        />
-
         {/* Skip Links for keyboard navigation */}
         <SkipLinks />
 
@@ -142,64 +133,62 @@ export default function RootLayout({
         {/* Accessibility Controls */}
         <AccessibilityControls variant="floating" position="bottom-right" />
 
-        {/* Performance Dashboard (Development Only) */}
-        {process.env.NODE_ENV === 'development' && <PerformanceDashboard />}
 
-        {/* Comprehensive Schema Markup for SEO */}
-        <Script id="ld-json-org" type="application/ld+json">
-          {JSON.stringify(organizationSchema)}
-        </Script>
-        <Script id="ld-json-local" type="application/ld+json">
-          {JSON.stringify(localBusinessSchema)}
-        </Script>
-        <Script id="ld-json-emergency" type="application/ld+json">
-          {JSON.stringify(emergencyContactSchema)}
-        </Script>
-        <Script id="ld-json-service" type="application/ld+json">
-          {JSON.stringify(domesticAbuseServiceSchema)}
-        </Script>
-        <Script id="ld-json-faq" type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </Script>
-        <Script id="ld-json-reviews" type="application/ld+json">
-          {JSON.stringify(reviewSolicitorsWidgetSchema)}
-        </Script>
-        <Script id="ld-json-sra" type="application/ld+json">
-          {JSON.stringify(sraApprovalSchema)}
-        </Script>
-        <Script id="ld-json-voice-search" type="application/ld+json">
-          {JSON.stringify(voiceSearchSchema)}
-        </Script>
-        <Script id="ld-json-location-voice" type="application/ld+json">
-          {JSON.stringify(locationBasedVoiceSchema)}
-        </Script>
-        <Script id="ld-json-emergency-voice" type="application/ld+json">
-          {JSON.stringify(emergencyVoiceSchema)}
-        </Script>
+      {/* Comprehensive Schema Markup for SEO */}
+      <Script id="ld-json-org" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(organizationSchema)}
+      </Script>
+      <Script id="ld-json-local" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(localBusinessSchema)}
+      </Script>
+      <Script id="ld-json-emergency" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(emergencyContactSchema)}
+      </Script>
+      <Script id="ld-json-service" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(domesticAbuseServiceSchema)}
+      </Script>
+      <Script id="ld-json-faq" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(faqSchema)}
+      </Script>
+      <Script id="ld-json-reviews" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(reviewSolicitorsWidgetSchema)}
+      </Script>
+      <Script id="ld-json-sra" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(sraApprovalSchema)}
+      </Script>
+      <Script id="ld-json-voice-search" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(voiceSearchSchema)}
+      </Script>
+      <Script id="ld-json-location-voice" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(locationBasedVoiceSchema)}
+      </Script>
+      <Script id="ld-json-emergency-voice" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(emergencyVoiceSchema)}
+      </Script>
 
-        {/* Web Vitals Performance Monitoring */}
-        <WebVitalsTracker />
+      {/* Web Vitals Performance Monitoring */}
+      <WebVitalsTracker />
 
-        {/* Service Worker Registration for Emergency Offline Access */}
-        <Script
-          id="service-worker"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
-                      console.log('[SW] Emergency service worker registered:', registration);
-                    })
-                    .catch((error) => {
-                      console.error('[SW] Emergency service worker registration failed:', error);
-                    });
-                });
-              }
-            `,
-          }}
-        />
+      {/* Service Worker Registration for Emergency Offline Access */}
+      <Script
+        id="service-worker"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+              window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                  .then((registration) => {
+                    console.log('[SW] Emergency service worker registered:', registration);
+                  })
+                  .catch((error) => {
+                    console.error('[SW] Emergency service worker registration failed:', error);
+                  });
+              });
+            }
+          `,
+        }}
+      />
       </body>
     </html>
   );

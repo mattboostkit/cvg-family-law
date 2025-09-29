@@ -24,7 +24,7 @@ const supportCategories: SupportCategory[] = [
   {
     title: "Emergency & Crisis Support",
     icon: AlertCircle,
-    color: "red",
+    color: "primary",
     resources: [
       {
         name: "Emergency Services",
@@ -52,7 +52,7 @@ const supportCategories: SupportCategory[] = [
   {
     title: "Domestic Abuse Support",
     icon: Shield,
-    color: "purple",
+    color: "secondary",
     resources: [
       {
         name: "Refuge",
@@ -86,7 +86,7 @@ const supportCategories: SupportCategory[] = [
   {
     title: "Children & Family Support",
     icon: Baby,
-    color: "green",
+    color: "primary",
     resources: [
       {
         name: "NSPCC",
@@ -121,7 +121,7 @@ const supportCategories: SupportCategory[] = [
   {
     title: "Mental Health & Wellbeing",
     icon: Brain,
-    color: "blue",
+    color: "secondary",
     resources: [
       {
         name: "Samaritans",
@@ -156,7 +156,7 @@ const supportCategories: SupportCategory[] = [
   {
     title: "Financial & Legal Support",
     icon: Wallet,
-    color: "yellow",
+    color: "primary",
     resources: [
       {
         name: "Citizens Advice",
@@ -191,24 +191,18 @@ const supportCategories: SupportCategory[] = [
 ];
 
 const colorMap = {
-  red: "from-red-50 to-red-100 border-red-200 hover:shadow-red-100",
-  purple: "from-purple-50 to-purple-100 border-purple-200 hover:shadow-purple-100",
-  green: "from-green-50 to-green-100 border-green-200 hover:shadow-green-100",
-  blue: "from-blue-50 to-blue-100 border-blue-200 hover:shadow-blue-100",
-  yellow: "from-yellow-50 to-yellow-100 border-yellow-200 hover:shadow-yellow-100",
+  primary: "from-primary-50 to-primary-100 border-primary-200 hover:shadow-primary-100",
+  secondary: "from-secondary-50 to-secondary-100 border-secondary-200 hover:shadow-secondary-100",
 };
 
 const iconColorMap = {
-  red: "text-red-600 bg-red-100",
-  purple: "text-purple-600 bg-purple-100",
-  green: "text-green-600 bg-green-100",
-  blue: "text-blue-600 bg-blue-100",
-  yellow: "text-yellow-600 bg-yellow-100",
+  primary: "text-primary-600 bg-primary-100",
+  secondary: "text-secondary-600 bg-secondary-100",
 };
 
 export default function SupportResources() {
   return (
-    <section className="section-padding bg-gradient-to-b from-warmgray-50 to-white">
+    <section className="section-padding bg-white">
       <div className="container-main">
         <div className="text-center mb-12">
           <motion.div
@@ -234,7 +228,7 @@ export default function SupportResources() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-r from-red-500 to-red-600 text-white rounded-2xl p-6 mb-12 shadow-xl"
+          className="bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-2xl p-6 mb-12 shadow-xl"
         >
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-3">

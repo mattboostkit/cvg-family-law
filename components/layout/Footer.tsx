@@ -8,36 +8,36 @@ import SRAApprovalBadge from "@/components/SRAApprovalBadge";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-warmgray-800 text-white">
       {/* Trust Badges Section */}
-      <div className="bg-warmgray-900 border-b border-gray-800">
+      <div className="bg-warmgray-700 border-b border-warmgray-600">
         <div className="container-main py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="flex flex-col items-center gap-2">
               <SRAApprovalBadge variant="minimal" />
-              <h4 className="font-semibold text-sm">SRA Approved</h4>
-              <p className="text-xs text-gray-400">Solicitors Regulation Authority</p>
+              <h4 className="font-semibold text-sm text-gray-100">SRA Approved</h4>
+              <p className="text-xs text-gray-300">Solicitors Regulation Authority</p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center">
-                <Award className="h-6 w-6 text-secondary-400" />
+              <div className="w-12 h-12 bg-warmgray-600 rounded-lg flex items-center justify-center">
+                <Award className="h-6 w-6 text-primary-400" />
               </div>
-              <h4 className="font-semibold text-sm">25+ Years</h4>
-              <p className="text-xs text-gray-400">Combined Experience</p>
+              <h4 className="font-semibold text-sm text-gray-100">25+ Years</h4>
+              <p className="text-xs text-gray-300">Combined Experience</p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center">
-                <Scale className="h-6 w-6 text-primary-400" />
+              <div className="w-12 h-12 bg-warmgray-600 rounded-lg flex items-center justify-center">
+                <Scale className="h-6 w-6 text-secondary-400" />
               </div>
-              <h4 className="font-semibold text-sm">Law Society</h4>
-              <p className="text-xs text-gray-400">Family Law Member</p>
+              <h4 className="font-semibold text-sm text-gray-100">Law Society</h4>
+              <p className="text-xs text-gray-300">Family Law Member</p>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 bg-secondary-600/20 rounded-lg flex items-center justify-center">
-                <Heart className="h-6 w-6 text-secondary-400" />
+              <div className="w-12 h-12 bg-warmgray-600 rounded-lg flex items-center justify-center">
+                <Heart className="h-6 w-6 text-primary-400" />
               </div>
-              <h4 className="font-semibold text-sm">1000+ Families</h4>
-              <p className="text-xs text-gray-400">Successfully Helped</p>
+              <h4 className="font-semibold text-sm text-gray-100">1000+ Families</h4>
+              <p className="text-xs text-gray-300">Successfully Helped</p>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="mb-4">
               <Image
                 src="/logos/Logo_Flat_White.svg"
                 alt="CVG Family Law"
@@ -55,7 +55,6 @@ export default function Footer() {
                 height={32}
                 className="h-8 w-auto"
               />
-              <span className="sr-only">CVG Family Law</span>
             </div>
             <p className="text-gray-300 mb-4">
               Forward-thinking family law specialists providing compassionate and expert legal support in Tunbridge Wells, Kent.
