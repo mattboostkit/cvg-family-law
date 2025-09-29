@@ -51,11 +51,11 @@ export class PersonalizationEngine {
     };
 
     this.saveContext();
-    this.trackEvent('settings_changed', 'general');
+    this.trackEvent('settings_changed', 'planning');
   }
 
   // Situation Assessment
-  public assessSituation(responses: Record<string, any>): SituationAssessmentResult {
+  public assessSituation(responses: Record<string, string | number | boolean | string[]>): SituationAssessmentResult {
     const situation = this.calculateUserSituation(responses);
     const confidence = this.calculateConfidence(responses);
     const riskFactors = this.identifyRiskFactors(responses);

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -134,7 +135,12 @@ const PrivacyConsentBanner: React.FC<PrivacyConsentBannerProps> = ({ onConsentCh
     onConsentChange?.(newConsentGiven);
   };
 
-  const sendConsentToServer = async (consentData: any) => {
+  const sendConsentToServer = async (consentData: {
+    given: boolean;
+    settings: typeof consentSettings;
+    timestamp: Date;
+    version: string;
+  }) => {
     try {
       await fetch('/api/analytics/events', {
         method: 'PUT',
@@ -292,7 +298,12 @@ interface PrivacySettingsProps {
     marketing: boolean;
     necessary: boolean;
   };
-  onSettingsChange: (settings: any) => void;
+  onSettingsChange: (settings: {
+    analytics: boolean;
+    functional: boolean;
+    marketing: boolean;
+    necessary: boolean;
+  }) => void;
   onSave: () => void;
   onClose: () => void;
 }
@@ -418,7 +429,7 @@ const PrivacySettings: React.FC<PrivacySettingsProps> = ({
         </ul>
         <p className="text-xs text-blue-700 mt-2">
           For more information about how we process your data, please read our{' '}
-          <a href="/privacy" className="underline hover:no-underline">Privacy Policy</a>.
+          <Link href="/privacy" className="underline hover:no-underline">Privacy Policy</Link>.
         </p>
       </div>
 

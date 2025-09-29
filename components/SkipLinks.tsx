@@ -228,7 +228,7 @@ export default function SkipLinks({
 
 // Hook for managing skip links in components
 export function useSkipLinks() {
-  const addSkipTarget = (id: string, title: string) => {
+  const useAddSkipTarget = (id: string, title: string) => {
     useEffect(() => {
       const element = document.getElementById(id) as HTMLElement | null;
       if (element) {
@@ -261,5 +261,5 @@ export function useSkipLinks() {
     }, [id, title]);
   };
 
-  return { addSkipTarget };
+  return { useAddSkipTarget };
 }

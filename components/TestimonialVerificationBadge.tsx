@@ -127,7 +127,7 @@ const TestimonialVerificationBadge: React.FC<VerificationBadgeProps> = ({
 
           {verificationInfo.details.length > 0 && (
             <div className="space-y-1">
-              <p className="font-medium text-gray-700">What's included:</p>
+              <p className="font-medium text-gray-700">What&#39;s included:</p>
               <ul className="space-y-1">
                 {verificationInfo.details.map((detail, index) => (
                   <li key={index} className="flex items-start gap-2 text-gray-600">

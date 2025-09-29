@@ -3,7 +3,7 @@ import { AnalyticsEvent, AnalyticsEventType, EventCategory, PrivacyComplianceDat
 
 // In-memory storage for demo purposes - in production, use a proper database
 let analyticsEvents: AnalyticsEvent[] = [];
-let privacyRecords: Map<string, PrivacyComplianceData> = new Map();
+const privacyRecords: Map<string, PrivacyComplianceData> = new Map();
 
 // POST - Receive analytics events from client
 export async function POST(request: NextRequest) {
@@ -130,7 +130,7 @@ export async function GET(request: NextRequest) {
 
     // Group results if requested
     if (groupBy) {
-      const grouped = groupEventsBy(filteredEvents, groupBy);
+      const grouped = groupEventsBy(filteredEvents, groupBy as keyof AnalyticsEvent);
       return NextResponse.json(grouped);
     }
 

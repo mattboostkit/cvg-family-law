@@ -23,10 +23,10 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       >
         {React.Children.map(children, (child) => {
           if (React.isValidElement(child)) {
-            return React.cloneElement(child as React.ReactElement<any>, {
-              checked: child.props.value === value,
-              onChange: () => onValueChange?.(child.props.value)
-            })
+            return React.cloneElement(child, {
+              checked: (child.props as { value: string }).value === value,
+              onChange: () => onValueChange?.((child.props as { value: string }).value)
+            } as React.InputHTMLAttributes<HTMLInputElement>)
           }
           return child
         })}

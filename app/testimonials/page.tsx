@@ -236,7 +236,7 @@ export default function TestimonialsPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Your Privacy, Our Priority</h2>
             <p className="text-xl mb-8 opacity-90">
-              We understand that sharing your story takes courage. That's why we offer multiple privacy options
+              We understand that sharing your story takes courage. That&#39;s why we offer multiple privacy options
               and ensure every testimonial is handled with the utmost care and respect.
             </p>
 

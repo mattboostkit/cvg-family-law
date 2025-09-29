@@ -21,7 +21,13 @@ class AnalyticsTracker {
   private userId?: string;
   private sessionStartTime: Date;
   private events: AnalyticsEvent[] = [];
-  private pageViews: any[] = [];
+  private pageViews: Array<{
+    url: string;
+    title: string;
+    timestamp: Date;
+    referrer?: string;
+    timeOnPage?: number;
+  }> = [];
   private consentGiven: boolean = false;
   private privacyData?: PrivacyComplianceData;
 
@@ -109,7 +115,20 @@ class AnalyticsTracker {
     }
   }
 
-  public exportUserData(): any {
+  public exportUserData(): {
+    events: AnalyticsEvent[];
+    pageViews: Array<{
+      url: string;
+      title: string;
+      timestamp: Date;
+      referrer?: string;
+      timeOnPage?: number;
+    }>;
+    sessionId: string;
+    userId?: string;
+    privacyData?: PrivacyComplianceData;
+    exportDate: Date;
+  } {
     return {
       events: this.events,
       pageViews: this.pageViews,
@@ -238,7 +257,7 @@ class AnalyticsTracker {
     action: string,
     label?: string,
     value?: number,
-    customData?: Record<string, any>
+    customData?: Record<string, string | number | boolean | undefined>
   ): void {
     if (!this.consentGiven || !this.config.trackingEnabled) {
       return;
