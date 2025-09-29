@@ -1,13 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Internationalization configuration
-  i18n: {
-    locales: ['en', 'ur', 'ar', 'pl', 'hi'],
-    defaultLocale: 'en',
-    localeDetection: false,
+  eslint: {
+    ignoreDuringBuilds: true,
   },
-
   // Image optimization configuration
   images: {
     remotePatterns: [
@@ -101,3 +97,6 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+
+

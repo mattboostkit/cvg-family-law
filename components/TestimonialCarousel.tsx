@@ -123,29 +123,30 @@ export default function TestimonialCarousel({
   itemsPerView = 1,
   className = ""
 }: EnhancedTestimonialCarouselProps) {
+  const carouselTestimonials = testimonials.length > 0 ? testimonials : sampleTestimonials;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(autoplay);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(autoplay && carouselTestimonials.length > 1);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setCurrentIndex((prev) => (prev + 1) % carouselTestimonials.length);
     }, 7000); // Slower for video testimonials
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, testimonials.length]);
+  }, [isAutoPlaying, carouselTestimonials.length]);
 
   const goToPrevious = () => {
     setIsAutoPlaying(false);
     setCurrentIndex((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1
+      prev === 0 ? carouselTestimonials.length - 1 : prev - 1
     );
   };
 
   const goToNext = () => {
     setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setCurrentIndex((prev) => (prev + 1) % carouselTestimonials.length);
   };
 
   const goToSlide = (index: number) => {
@@ -153,7 +154,7 @@ export default function TestimonialCarousel({
     setCurrentIndex(index);
   };
 
-  const currentTestimonial = testimonials[currentIndex];
+  const currentTestimonial = carouselTestimonials[currentIndex] ?? carouselTestimonials[0];
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-primary-50 relative overflow-hidden">
@@ -319,7 +320,7 @@ export default function TestimonialCarousel({
 
           {/* Dots Indicator */}
           <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((testimonial, index) => (
+            {carouselTestimonials.map((testimonial, index) => (
               <motion.button
                 key={testimonial.id}
                 onClick={() => goToSlide(index)}

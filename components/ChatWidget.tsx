@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, X, Minimize2, Phone, AlertTriangle } from 'lucide-react';
 import { ChatWindow } from './ChatWindow';
-import { ChatWebSocketManager } from '@/lib/websocket';
+import { ChatWebSocketManager, WebSocketEvents } from '@/lib/websocket';
 import { CrisisLevel } from '@/types/chat';
 
 interface ChatWidgetProps {
@@ -39,7 +39,7 @@ export function ChatWidget({
       encryptionEnabled: true
     };
 
-    const wsEvents = {
+    const wsEvents: WebSocketEvents = {
       onMessage: (message) => {
         console.log('Received message:', message);
         // Handle incoming messages

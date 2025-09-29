@@ -4,17 +4,18 @@ import { getTranslations, getDirection } from '@/lib/i18n';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface HomePageProps {
-  params: {
+  params: Promise<{
     locale: SupportedLocale;
-  };
+  }>;
 }
 
 // Generate metadata for each locale
 export async function generateMetadata({
-  params: { locale }
+  params,
 }: {
-  params: { locale: SupportedLocale };
+  params: Promise<{ locale: SupportedLocale }>;
 }): Promise<Metadata> {
+  const { locale } = await params;
   const translations = getTranslations(locale);
   const direction = getDirection(locale);
 
@@ -34,7 +35,8 @@ export async function generateMetadata({
   };
 }
 
-export default function HomePage({ params: { locale } }: HomePageProps) {
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
   const translations = getTranslations(locale);
   const direction = getDirection(locale);
 

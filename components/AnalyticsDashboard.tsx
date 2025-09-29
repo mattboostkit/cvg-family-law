@@ -377,7 +377,7 @@ const BehaviorTab: React.FC<{ data: AnalyticsDashboardData }> = ({ data }) => (
         </div>
         <div className="flex justify-between">
           <span>Pages per Session</span>
-          <span className="font-bold">{data.userBehavior.pagesPerSession.toFixed(1)}</span>
+          <span className="font-bold">{data.userBehavior.averagePagesPerSession.toFixed(1)}</span>
         </div>
         <div className="flex justify-between">
           <span>Bounce Rate</span>

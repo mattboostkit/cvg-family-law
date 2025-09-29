@@ -160,7 +160,7 @@ const GDPRComplianceDashboard: React.FC<GDPRComplianceDashboardProps> = ({
 
   const submitDataRequest = async (requestType: 'access' | 'rectification' | 'erasure' | 'portability', description: string) => {
     try {
-      const request: Omit<DataSubjectRequest, 'id' | 'requestedAt' | 'status' | 'completedAt' | 'response'> = {
+      const request: Omit<DataSubjectRequest, 'id' | 'completedAt' | 'response'> = {
         requestType,
         userId: getCurrentUserId(),
         requestedAt: new Date(),
@@ -572,7 +572,7 @@ const DataRequestForm: React.FC<DataRequestFormProps> = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <Label htmlFor="requestType">Request Type</Label>
-        <Select value={requestType} onValueChange={(value: any) => setRequestType(value)}>
+        <Select value={requestType} onValueChange={(value) => setRequestType(value as 'access' | 'rectification' | 'erasure' | 'portability')}>
           <SelectTrigger>
             <SelectValue />
           </SelectTrigger>

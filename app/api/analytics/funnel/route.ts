@@ -547,7 +547,7 @@ function suggestImprovements(stepAnalysis: StepAnalysis[], funnel: ConversionFun
 }
 
 // Add event to funnel analysis (called from events API)
-export function addEventToFunnelAnalysis(event: AnalyticsEvent) {
+function addEventToFunnelAnalysis(event: AnalyticsEvent) {
   funnelEvents.push(event);
 
   // Keep only recent events (last 30 days)

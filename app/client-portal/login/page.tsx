@@ -3,7 +3,7 @@
 // Secure Login Page for Client Portal
 // Implements 2FA, password strength validation, and security features
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   User,
@@ -19,7 +19,7 @@ import {
   logSecurityEvent
 } from '@/lib/auth';
 
-export default function LoginPage() {
+function LoginPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [step, setStep] = useState<'login' | '2fa' | 'security-questions'>('login');
@@ -481,5 +481,13 @@ export default function LoginPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-gray-500">Loading secure login...</div>}>
+      <LoginPageContent />
+    </Suspense>
   );
 }

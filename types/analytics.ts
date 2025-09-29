@@ -36,6 +36,33 @@ export interface FunnelStep {
   averageTimeToComplete?: number;
 }
 
+export interface FunnelStepAnalysis {
+  stepId: string;
+  stepName: string;
+  order: number;
+  totalEvents: number;
+  uniqueSessions: number;
+  uniqueUsers: number;
+  conversionRate: number;
+  dropOffRate: number;
+  averageTimeToComplete: number;
+}
+
+export interface FunnelAnalysis {
+  totalEntries: number;
+  totalCompletions: number;
+  overallConversionRate: number;
+  averageTimeToComplete: number;
+  stepAnalysis: FunnelStepAnalysis[];
+  dropOffPoints: string[];
+  improvementOpportunities: string[];
+}
+
+export interface FunnelAnalysisResult {
+  funnel: ConversionFunnel;
+  analysis: FunnelAnalysis;
+}
+
 export interface VisitorSession {
   id: string;
   startTime: Date;
@@ -304,7 +331,7 @@ export interface AnalyticsDashboardData {
   realTimeVisitors: number;
   activeSessions: number;
   topPages: PagePopularity[];
-  conversionFunnels: ConversionFunnel[];
+  conversionFunnels: FunnelAnalysisResult[];
   alerts: AnalyticsAlert[];
 }
 

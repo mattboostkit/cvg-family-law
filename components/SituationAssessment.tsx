@@ -211,6 +211,7 @@ export function SituationAssessment({ onComplete, onSkip, className }: Situation
 
   const renderQuestion = (question: SituationAssessmentQuestion) => {
     const IconComponent = CATEGORY_ICONS[question.category];
+    const currentResponse = responses[question.id];
 
     return (
       <div className="space-y-6">
@@ -233,13 +234,13 @@ export function SituationAssessment({ onComplete, onSkip, className }: Situation
         <div className="space-y-4">
           {question.type === 'single' && question.options && (
             <RadioGroup
-              value={responses[question.id] || ''}
+              value={typeof currentResponse === 'string' ? currentResponse : ''}
               onValueChange={(value) => handleResponse(question.id, value)}
               className="space-y-3"
             >
               {question.options.map((option) => (
                 <div key={option.id} className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-gray-50">
-                  <RadioGroupItem value={option.value} id={option.id} />
+                  <RadioGroupItem value={String(option.value)} id={option.id} />
                   <Label htmlFor={option.id} className="flex-1 cursor-pointer">
                     {option.text}
                   </Label>

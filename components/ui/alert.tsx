@@ -34,4 +34,15 @@ const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttrib
 )
 AlertDescription.displayName = "AlertDescription"
 
-export { Alert, AlertDescription }
+const AlertTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className = '', ...props }, ref) => (
+    <h5
+      ref={ref}
+      className={`mb-2 font-semibold leading-none tracking-tight ${className}`.trim()}
+      {...props}
+    />
+  )
+)
+AlertTitle.displayName = "AlertTitle"
+
+export { Alert, AlertDescription, AlertTitle }

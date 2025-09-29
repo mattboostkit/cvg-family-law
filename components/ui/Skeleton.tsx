@@ -47,12 +47,14 @@ export function SkeletonText({
   className?: string;
   width?: string | string[];
 }) {
+  const resolvedWidth = Array.isArray(width) ? width[0] : width;
+
   if (lines === 1) {
     return (
       <Skeleton
         variant="text"
         className={cn("w-full", className)}
-        width={width}
+        width={resolvedWidth}
       />
     );
   }

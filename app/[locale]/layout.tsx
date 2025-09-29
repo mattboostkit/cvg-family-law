@@ -43,9 +43,9 @@ const notoSans = Noto_Sans({
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 // Generate static params for all supported locales
@@ -58,10 +58,11 @@ function isValidLocale(locale: string): locale is SupportedLocale {
   return locales.includes(locale as SupportedLocale);
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
-  params: { locale }
+  params,
 }: LocaleLayoutProps) {
+  const { locale } = await params;
   // Validate locale
   if (!isValidLocale(locale)) {
     notFound();
@@ -100,10 +101,11 @@ export default function LocaleLayout({
 
 // Generate metadata for each locale
 export async function generateMetadata({
-  params: { locale }
+  params,
 }: {
-  params: { locale: string }
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   if (!isValidLocale(locale)) {
     return {};
   }
