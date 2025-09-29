@@ -126,10 +126,6 @@ export function addLocaleToPath(pathname: string, locale: SupportedLocale): stri
     return `/${locale}`;
   }
 
-  if (locale === defaultLocale) {
-    return cleanPath;
-  }
-
   return `/${locale}${cleanPath}`;
 }
 
