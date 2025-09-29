@@ -121,8 +121,16 @@ export function removeLocaleFromPath(pathname: string): string {
  */
 export function addLocaleToPath(pathname: string, locale: SupportedLocale): string {
   const cleanPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
-  const normalizedPath = cleanPath === '/' ? '' : cleanPath;
-  return `/${locale}${normalizedPath}`;
+
+  if (cleanPath === '/') {
+    return `/${locale}`;
+  }
+
+  if (locale === defaultLocale) {
+    return cleanPath;
+  }
+
+  return `/${locale}${cleanPath}`;
 }
 
 /**
