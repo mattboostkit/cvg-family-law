@@ -1,0 +1,466 @@
+/* ===============================================
+   ACCESSIBILITY STYLES - WCAG 2.1 AA COMPLIANT
+   =============================================== */
+
+/* CSS Custom Properties for Accessibility */
+:root {
+  /* High Contrast Colors */
+  --high-contrast-bg: #000000;
+  --high-contrast-text: #ffffff;
+  --high-contrast-border: #ffffff;
+  --high-contrast-link: #ffff00;
+  --high-contrast-focus: #ffff00;
+
+  /* Focus Colors */
+  --focus-color: #005fcc;
+  --focus-shadow: 0 0 0 3px rgba(0, 95, 204, 0.3);
+  --focus-shadow-dark: 0 0 0 3px rgba(255, 255, 0, 0.5);
+
+  /* Touch Target Sizes */
+  --min-touch-target: 44px;
+  --min-touch-target-small: 32px;
+
+  /* Screen Reader Only Content */
+  --sr-only-offscreen: -9999px;
+}
+
+/* ===============================================
+   HIGH CONTRAST MODE STYLES
+   =============================================== */
+
+@media (prefers-contrast: high) {
+  :root {
+    --color-background: var(--high-contrast-bg);
+    --color-text: var(--high-contrast-text);
+    --color-border: var(--high-contrast-border);
+  }
+
+  * {
+    background-color: var(--high-contrast-bg) !important;
+    color: var(--high-contrast-text) !important;
+    border-color: var(--high-contrast-border) !important;
+  }
+
+  a {
+    color: var(--high-contrast-link) !important;
+    text-decoration: underline !important;
+  }
+
+  a:focus {
+    outline: 3px solid var(--high-contrast-focus) !important;
+    outline-offset: 2px !important;
+  }
+
+  button {
+    border: 2px solid var(--high-contrast-border) !important;
+    min-height: var(--min-touch-target);
+    min-width: var(--min-touch-target);
+  }
+
+  input, select, textarea {
+    border: 2px solid var(--high-contrast-border) !important;
+    background-color: var(--high-contrast-bg) !important;
+    color: var(--high-contrast-text) !important;
+  }
+}
+
+/* ===============================================
+   FOCUS INDICATOR ENHANCEMENTS
+   =============================================== */
+
+*:focus {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Enhanced focus for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  box-shadow: var(--focus-shadow);
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Skip links focus styles */
+.skip-link:focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 1rem;
+  background: var(--focus-color);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transform: translateY(0);
+}
+
+/* ===============================================
+   SCREEN READER UTILITIES
+   =============================================== */
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: var(--sr-only-offscreen) !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Make sr-only content visible when focused */
+.sr-only:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: inherit !important;
+  margin: inherit !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: inherit !important;
+}
+
+/* Screen reader only text for icons */
+.sr-only-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: var(--sr-only-offscreen) !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Make screen reader text visible on focus */
+.sr-only-text:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: inherit !important;
+  margin: inherit !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: inherit !important;
+}
+
+/* ===============================================
+   REDUCED MOTION PREFERENCES
+   =============================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable parallax and transform animations */
+  [style*="transform"],
+  [style*="animation"],
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Respect reduced motion but keep essential functionality */
+@media (prefers-reduced-motion: reduce) {
+  /* Keep focus animations as they're essential for accessibility */
+  *:focus-visible {
+    transition: outline-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  /* Keep essential state changes */
+  [aria-expanded]:not([aria-expanded="false"]) {
+    transition: transform 0.15s ease-in-out;
+  }
+}
+
+/* ===============================================
+   TOUCH TARGET SIZE ADJUSTMENTS
+   =============================================== */
+
+/* Ensure minimum touch target sizes */
+button,
+a,
+input,
+select,
+textarea,
+[role="button"],
+[tabindex="0"] {
+  min-height: var(--min-touch-target);
+  min-width: var(--min-touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+/* Smaller touch targets for compact interfaces */
+button[data-size="small"],
+a[data-size="small"],
+.button-small,
+.btn-small {
+  min-height: var(--min-touch-target-small);
+  min-width: var(--min-touch-target-small);
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Touch-friendly spacing for mobile */
+@media (pointer: coarse) {
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 1rem;
+  }
+}
+
+/* ===============================================
+   COLOR CONTRAST IMPROVEMENTS
+   =============================================== */
+
+/* Enhanced contrast for text */
+.text-low-contrast {
+  color: #666666;
+}
+
+@media (prefers-contrast: high) {
+  .text-low-contrast {
+    color: var(--high-contrast-text);
+  }
+}
+
+/* Ensure sufficient contrast ratios */
+::selection {
+  background-color: var(--focus-color);
+  color: white;
+}
+
+/* High contrast selection */
+@media (prefers-contrast: high) {
+  ::selection {
+    background-color: var(--high-contrast-focus);
+    color: var(--high-contrast-bg);
+  }
+}
+
+/* ===============================================
+   ACCESSIBILITY-SPECIFIC UTILITIES
+   =============================================== */
+
+/* Hide content visually but keep it available to screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: var(--sr-only-offscreen) !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Show on focus for skip links and keyboard users */
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: var(--sr-only-offscreen) !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Enhanced focus indicators for dark themes */
+@media (prefers-color-scheme: dark) {
+  *:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+  }
+}
+
+/* Ensure ARIA live regions are properly announced */
+[aria-live] {
+  speak: normal;
+}
+
+[aria-live="assertive"] {
+  speak: assertive;
+}
+
+[aria-live="polite"] {
+  speak: polite;
+}
+
+/* Improve form accessibility */
+fieldset {
+  border: 2px solid currentColor;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+legend {
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+/* Ensure images have proper alt text styling */
+img[alt] {
+  font-style: italic;
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* High contrast improvements for images */
+@media (prefers-contrast: high) {
+  img[alt] {
+    color: var(--high-contrast-text);
+  }
+}
+
+/* Enhanced button accessibility */
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Focus management for modal dialogs */
+.modal:focus {
+  outline: none;
+}
+
+.modal:focus-visible {
+  outline: 3px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient spacing for reading */
+.reading-line-height {
+  line-height: 1.6;
+}
+
+.reading-letter-spacing {
+  letter-spacing: 0.05em;
+}
+
+/* Enhanced link accessibility */
+a {
+  color: var(--focus-color);
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:visited {
+  color: #7c3aed; /* Purple for visited links */
+}
+
+/* High contrast link improvements */
+@media (prefers-contrast: high) {
+  a {
+    color: var(--high-contrast-link);
+    text-decoration-thickness: 3px;
+  }
+}
+
+/* Ensure headings have proper hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  margin-bottom: 0.5em;
+}
+
+/* Focus trap styling for accessibility */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap::before,
+.focus-trap::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Announcements for dynamic content */
+.announcement {
+  position: absolute;
+  left: var(--sr-only-offscreen);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Show announcements to screen readers */
+.announcement:dir(rtl) {
+  left: auto;
+  right: var(--sr-only-offscreen);
+}
+
+/* ===============================================
+   PRINT ACCESSIBILITY
+   =============================================== */
+
+@media print {
+  /* Ensure sufficient contrast for printing */
+  * {
+    color: #000000 !important;
+    background: transparent !important;
+  }
+
+  /* Show link URLs for screen readers using print */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.875rem;
+  }
+
+  /* Don't show URLs for internal links */
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+}
