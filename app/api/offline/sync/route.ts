@@ -6,6 +6,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { offlineStorage } from '@/lib/offline-storage';
 
+interface BookingFormData {
+  name: string;
+  email: string;
+  phone: string;
+  appointmentType: string;
+  preferredDate?: string;
+  preferredTime?: string;
+  message?: string;
+  [key: string]: unknown;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -147,7 +158,7 @@ async function syncEmergencyContact(data: Record<string, unknown>) {
   }
 }
 
-async function syncBookingForm(data: any) {
+async function syncBookingForm(data: BookingFormData) {
   try {
     // Validate booking data structure
     if (!data.name || !data.email || !data.phone || !data.appointmentType) {

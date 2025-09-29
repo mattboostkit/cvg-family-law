@@ -3,6 +3,88 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { IncomingMessage } from 'http';
 import { ChatMessage, ChatSession, CrisisLevel, Specialist } from '@/types/chat';
 
+// WebSocket message interfaces
+interface WebSocketMessage {
+  type: string;
+  [key: string]: unknown;
+}
+
+interface HandshakeMessage {
+  type: 'handshake';
+  sessionId: string;
+}
+
+interface ChatMessageMessage {
+  type: 'message';
+  sessionId: string;
+  content: string;
+  messageType?: 'text' | 'file' | 'system' | 'emergency';
+  metadata?: Record<string, unknown>;
+  senderName?: string;
+}
+
+interface TypingMessage {
+  type: 'typing';
+  sessionId: string;
+  isTyping: boolean;
+}
+
+interface JoinSessionMessage {
+  type: 'join_session';
+  sessionId: string;
+  userType?: 'user' | 'specialist' | 'system';
+  userName?: string;
+}
+
+interface CrisisEscalationMessage {
+  type: 'crisis_escalation';
+  sessionId: string;
+  crisisLevel: CrisisLevel;
+  reason: string;
+  content?: string;
+}
+
+interface HeartbeatMessage {
+  type: 'heartbeat';
+}
+
+interface ErrorMessage {
+  type: 'error';
+  error: string;
+}
+
+// Union type for all possible WebSocket messages
+type WebSocketMessageType =
+  | HandshakeMessage
+  | ChatMessageMessage
+  | TypingMessage
+  | JoinSessionMessage
+  | CrisisEscalationMessage
+  | HeartbeatMessage
+  | ErrorMessage;
+
+interface SystemMessage {
+  type: 'system';
+  action: string;
+  payload?: unknown;
+  timestamp?: Date;
+  [key: string]: unknown;
+}
+
+interface ErrorMessage {
+  type: 'error';
+  error: string;
+}
+
+interface HeartbeatMessage extends WebSocketMessage {
+  type: 'heartbeat';
+}
+
+interface HeartbeatAckMessage {
+  type: 'heartbeat_ack';
+  timestamp: Date;
+}
+
 // In-memory storage - replace with proper database
 const chatSessions = new Map<string, ChatSession>();
 const connectedClients = new Map<string, WebSocket>();
@@ -237,26 +319,26 @@ function handleWebSocketConnection(ws: WebSocket, request: IncomingMessage) {
 /**
  * Handle incoming WebSocket messages
  */
-async function handleWebSocketMessage(ws: WebSocket, clientId: string, message: any) {
+async function handleWebSocketMessage(ws: WebSocket, clientId: string, message: WebSocketMessageType) {
   switch (message.type) {
     case 'handshake':
-      await handleHandshake(ws, clientId, message);
+      await handleHandshake(ws, clientId, message as HandshakeMessage);
       break;
 
     case 'message':
-      await handleChatMessage(ws, clientId, message);
+      await handleChatMessage(ws, clientId, message as ChatMessageMessage);
       break;
 
     case 'typing':
-      handleTypingIndicator(ws, clientId, message);
+      handleTypingIndicator(ws, clientId, message as TypingMessage);
       break;
 
     case 'join_session':
-      await handleJoinSession(ws, clientId, message);
+      await handleJoinSession(ws, clientId, message as JoinSessionMessage);
       break;
 
     case 'crisis_escalation':
-      await handleCrisisEscalation(ws, clientId, message);
+      await handleCrisisEscalation(ws, clientId, message as CrisisEscalationMessage);
       break;
 
     case 'heartbeat':
@@ -278,7 +360,7 @@ async function handleWebSocketMessage(ws: WebSocket, clientId: string, message: 
 /**
  * Handle client handshake
  */
-async function handleHandshake(ws: WebSocket, clientId: string, message: any) {
+async function handleHandshake(ws: WebSocket, clientId: string, message: HandshakeMessage) {
   const sessionId = message.sessionId;
 
   ws.send(JSON.stringify({
@@ -308,7 +390,7 @@ async function handleHandshake(ws: WebSocket, clientId: string, message: any) {
 /**
  * Handle chat messages
  */
-async function handleChatMessage(ws: WebSocket, clientId: string, message: any) {
+async function handleChatMessage(ws: WebSocket, clientId: string, message: ChatMessageMessage) {
   const { sessionId, content, messageType = 'text', metadata } = message;
 
   let session = chatSessions.get(sessionId);
@@ -375,6 +457,7 @@ async function handleChatMessage(ws: WebSocket, clientId: string, message: any) 
   // Handle crisis escalation
   if (crisisLevel === 'critical' || crisisLevel === 'high') {
     await handleCrisisEscalation(ws, clientId, {
+      type: 'crisis_escalation',
       sessionId,
       crisisLevel,
       reason: 'Message content analysis',
@@ -386,7 +469,7 @@ async function handleChatMessage(ws: WebSocket, clientId: string, message: any) 
 /**
  * Handle typing indicators
  */
-function handleTypingIndicator(ws: WebSocket, clientId: string, message: any) {
+function handleTypingIndicator(ws: WebSocket, clientId: string, message: TypingMessage) {
   const { sessionId, isTyping } = message;
 
   if (isTyping) {
@@ -413,7 +496,7 @@ function handleTypingIndicator(ws: WebSocket, clientId: string, message: any) {
 /**
  * Handle user joining a session
  */
-async function handleJoinSession(ws: WebSocket, clientId: string, message: any) {
+async function handleJoinSession(ws: WebSocket, clientId: string, message: JoinSessionMessage) {
   const { sessionId, userType = 'user' } = message;
 
   const session = chatSessions.get(sessionId);
@@ -474,7 +557,7 @@ async function handleJoinSession(ws: WebSocket, clientId: string, message: any) 
 /**
  * Handle crisis escalation
  */
-async function handleCrisisEscalation(ws: WebSocket, clientId: string, message: any) {
+async function handleCrisisEscalation(ws: WebSocket, clientId: string, message: CrisisEscalationMessage) {
   const { sessionId, crisisLevel, reason, content } = message;
 
   const session = chatSessions.get(sessionId);
@@ -554,7 +637,7 @@ function analyzeMessageForCrisis(content: string): CrisisLevel {
 /**
  * Broadcast message to all connected clients
  */
-function broadcastToAll(message: any) {
+function broadcastToAll(message: SystemMessage | ErrorMessage) {
   const messageStr = JSON.stringify(message);
   for (const client of connectedClients.values()) {
     if (client.readyState === WebSocket.OPEN) {
@@ -566,7 +649,7 @@ function broadcastToAll(message: any) {
 /**
  * Broadcast message to clients in a specific session
  */
-function broadcastToSession(sessionId: string, message: any, excludeClientId?: string) {
+function broadcastToSession(sessionId: string, message: SystemMessage | ErrorMessage | ChatMessage | { type: string; payload: unknown; timestamp: Date }, excludeClientId?: string) {
   const messageStr = JSON.stringify(message);
 
   for (const [clientId, client] of connectedClients.entries()) {

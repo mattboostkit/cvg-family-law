@@ -106,7 +106,7 @@ export default function HomePage({ params: { locale } }: HomePageProps) {
                 {translations.services.childrenLaw}
               </h3>
               <p className="text-muted-foreground">
-                Protecting children's rights and welfare in family law matters.
+                Protecting children&apos;s rights and welfare in family law matters.
               </p>
             </div>
           </div>

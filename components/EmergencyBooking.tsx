@@ -303,7 +303,7 @@ export const EmergencyBooking: React.FC<EmergencyBookingProps> = ({
               <MessageCircle className="w-5 h-5 text-red-600 mt-0.5" />
               <div>
                 <p className="font-medium text-red-800">Crisis Text Support</p>
-                <p className="text-sm text-red-700">Text "HELP" to 85258 for 24/7 crisis support</p>
+                <p className="text-sm text-red-700">Text &quot;HELP&quot; to 85258 for 24/7 crisis support</p>
               </div>
             </div>
           </div>

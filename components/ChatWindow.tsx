@@ -15,6 +15,10 @@ import {
 import { ChatWebSocketManager } from '@/lib/websocket';
 import { ChatMessage, CrisisLevel, MessageStatus } from '@/types/chat';
 
+interface TypingIndicator {
+  isTyping: boolean;
+}
+
 interface ChatWindowProps {
   wsManager: ChatWebSocketManager | null;
   isConnected: boolean;
@@ -65,7 +69,7 @@ export function ChatWindow({
       setMessages(prev => [...prev, messageWithStatus]);
     };
 
-    const handleTyping = (indicator: any) => {
+    const handleTyping = (indicator: TypingIndicator) => {
       if (indicator.isTyping) {
         setSpecialistTyping('Crisis Specialist');
       } else {
@@ -283,7 +287,7 @@ export function ChatWindow({
               Welcome to Crisis Support Chat
             </p>
             <p className="text-xs mt-1">
-              Share what's happening. We're here to help.
+              Share what&apos;s happening. We&apos;re here to help.
             </p>
           </div>
         ) : (

@@ -5,6 +5,15 @@
 
 import { encryptData, decryptData } from './encryption';
 
+// Extend ServiceWorkerRegistration to include sync property for Background Sync API
+declare global {
+  interface ServiceWorkerRegistration {
+    sync?: {
+      register(tag: string): Promise<void>;
+    };
+  }
+}
+
 export interface OfflineDataItem {
   id: string;
   type: 'emergency-contact' | 'booking-form' | 'chat-message' | 'risk-assessment';
@@ -361,7 +370,7 @@ class OfflineStorageManager {
 
       // Check if background sync is supported
       if ('sync' in registration) {
-        await (registration as any).sync.register(tag);
+        await registration.sync!.register(tag);
         console.log(`[OfflineStorage] Background sync triggered: ${tag}`);
       } else {
         console.log('[OfflineStorage] Background sync not supported');

@@ -7,6 +7,18 @@ import {
   EventCategory
 } from '@/types/analytics';
 
+interface StepAnalysis {
+  stepId: string;
+  stepName: string;
+  order: number;
+  totalEvents: number;
+  uniqueSessions: number;
+  uniqueUsers: number;
+  conversionRate: number;
+  dropOffRate: number;
+  averageTimeToComplete: number;
+}
+
 // In-memory storage for demo - in production, use database
 let conversionFunnels: ConversionFunnel[] = [];
 let funnelEvents: AnalyticsEvent[] = [];
@@ -496,7 +508,7 @@ function calculateFunnelCompletionTime(events: AnalyticsEvent[], funnel: Convers
     completionTimes.reduce((sum, time) => sum + time, 0) / completionTimes.length : 0;
 }
 
-function identifyDropOffPoints(stepAnalysis: any[]): string[] {
+function identifyDropOffPoints(stepAnalysis: StepAnalysis[]): string[] {
   const dropOffPoints: string[] = [];
 
   for (let i = 1; i < stepAnalysis.length; i++) {
@@ -511,7 +523,7 @@ function identifyDropOffPoints(stepAnalysis: any[]): string[] {
   return dropOffPoints;
 }
 
-function suggestImprovements(stepAnalysis: any[], funnel: ConversionFunnel): string[] {
+function suggestImprovements(stepAnalysis: StepAnalysis[], funnel: ConversionFunnel): string[] {
   const suggestions: string[] = [];
 
   // Find steps with low conversion rates
